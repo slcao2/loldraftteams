@@ -1,0 +1,50 @@
+$unranked-color: #FFFFFF;
+$bronze-color: #FFF3E0;
+$silver-color: #FAFAFA;
+$gold-color: #FFFDE7;
+$platinum-color: #E8F5E9;
+$diamond-color: #E3F2FD;
+$master-color: #F3E5F5;
+$challenger-color: #FFEBEE;
+
+.search-box {
+  width: 100%;
+}
+
+.player-rank {
+  text-align: center;
+}
+
+.player-background {
+  &-unranked {
+    background: $unranked-color;
+  }
+
+  &-bronze {
+    background: $bronze-color;
+  }
+
+  &-silver {
+    background: $silver-color;
+  }
+
+  &-gold {
+    background: $gold-color;
+  }
+
+  &-platinum {
+    background: $platinum-color;
+  }
+
+  &-diamond {
+    background: $diamond-color;
+  }
+
+  &-master {
+    background: $master-color;
+  }
+
+  &-challenger {
+    background: $challenger-color;
+  }
+}

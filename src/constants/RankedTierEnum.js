@@ -142,4 +142,12 @@ export const getEnumFromShortName = (name) => {
   return enumValue;
 };
 
+export const getEnumWeightValue = (value) => {
+  const maxValue = RankedTierEnum.CHALLENGER_I.ordinal;
+  // return value;
+  // return value / maxValue;
+  // return Math.exp(value) / Math.exp(maxValue);
+  return Math.exp(value / maxValue);
+};
+
 export default RankedTierEnum;

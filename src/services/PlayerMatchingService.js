@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import update from 'immutability-helper';
 import {
   TOP,
   JUNGLE,
@@ -8,7 +9,7 @@ import {
   mapRoleToIndex,
   mapIndexToRole,
 } from '../constants/riotConstants';
-import { getEnumFromShortName } from '../constants/RankedTierEnum';
+import { getEnumFromShortName, getEnumWeightValue } from '../constants/RankedTierEnum';
 
 const removePlayer = (playerName, weights) => {
   const newWeights = weights.map(role =>
@@ -70,69 +71,32 @@ const getWeightedRoleValues = (players, role) => {
   const roleIndex = mapRoleToIndex(role);
   const weightedValues = players.map(player => ({
     name: player.summonerName,
-    value: player.roles[roleIndex] * getEnumFromShortName(player.rank).ordinal,
+    value: player.roles[roleIndex] * getEnumWeightValue(getEnumFromShortName(player.rank).ordinal),
   }));
   return weightedValues;
 };
 
-const isTeamOne = (player, teams) => (!!teams.teamOne.find(name => name === player));
-
-const listLinkError = (sameTeam, differentTeam, team) => {
-  const errors = [];
-  sameTeam.forEach((name, index) => {
-    const onSameTeam = team.find(player => player === name);
-    if (!onSameTeam) {
-      errors.push(index);
-    }
-  });
-  differentTeam.forEach((name, index) => {
-    const onSameTeam = team.find(player => player === name);
-    if (onSameTeam) {
-      errors.push(index);
-    }
-  });
-  return _.uniq(errors);
+const removePlayerFromWeights = (weights, playerName) => {
+  const newWeights = weights.map(roleArr => _.filter(roleArr, player => player.name !== playerName));
+  return newWeights;
 };
 
-const resolveLinkedPlayer = (players, teams) => {
-  const newTeams = {
-    teamOne: teams.teamOne.slice(),
-    teamTwo: teams.teamTwo.slice(),
-  };
-
-  let playerCount = 0;
-
-  const findPlayerOne = player => player.summonerName === newTeams.teamOne[playerCount];
-  const findPlayerTwo = player => player.summonerName === newTeams.teamTwo[playerCount];
-
-  while (playerCount < 5) {
-    const foundPlayer = players.find(findPlayerOne);
-    const playerTeam = isTeamOne(foundPlayer.summonerName, newTeams) ? newTeams.teamOne : newTeams.teamTwo;
-    const errors = listLinkError(foundPlayer.sameTeam, foundPlayer.differentTeam, playerTeam);
-    errors.forEach((error) => {
-      const swapValue = newTeams.teamOne[error];
-      newTeams.teamOne[error] = newTeams.teamTwo[error];
-      newTeams.teamTwo[error] = swapValue;
+const getMaxWeightPlayer = (weights) => {
+  let maxPlayer = { value: 0 };
+  weights.forEach((roleArr, index) => {
+    let max = { value: 0 };
+    roleArr.forEach((player) => {
+      max = player.value > max.value ? player : max;
     });
-
-    const secondFoundPlayer = players.find(findPlayerTwo);
-    const secondPlayerTeam = isTeamOne(secondFoundPlayer.summonerName, newTeams) ? newTeams.teamOne : newTeams.teamTwo;
-    const secondErrors = listLinkError(secondFoundPlayer.sameTeam, secondFoundPlayer.differentTeam, secondPlayerTeam);
-    secondErrors.forEach((error) => {
-      const swapValue = newTeams.teamOne[error];
-      newTeams.teamOne[error] = newTeams.teamTwo[error];
-      newTeams.teamTwo[error] = swapValue;
-    });
-
-    playerCount += 1;
-  }
-
-  console.log(newTeams);
-  return newTeams;
+    if (max.value > maxPlayer.value) {
+      maxPlayer = update(max, { role: { $set: mapIndexToRole(index) } });
+    }
+  });
+  return maxPlayer;
 };
 
 const getTeamPlayers = (players) => {
-  let teams = {
+  const teams = {
     teamOne: [],
     teamTwo: [],
   };
@@ -146,27 +110,30 @@ const getTeamPlayers = (players) => {
   const midWeights = getWeightedRoleValues(players, MID);
   const duoCarryWeights = getWeightedRoleValues(players, DUO_CARRY);
   const duoSupportWeights = getWeightedRoleValues(players, DUO_SUPPORT);
-  let weights = [topWeights, jungleWeights, midWeights, duoCarryWeights, duoSupportWeights];
-  console.log(...weights);
+  const startWeights = [topWeights, jungleWeights, midWeights, duoCarryWeights, duoSupportWeights];
+  console.log(...startWeights);
+
+  console.log(getMaxWeightPlayer(startWeights));
+  console.log(removePlayerFromWeights(startWeights, 'r4nc0r'));
 
   /*
   Get the role that has the highest value in it.
   Put that highest value in one team, and then the closest to that value on the other team.
   Repeat until there are no more roles to go through.
    */
-  const maxWeights = getMaxWeights(weights);
-
-  let maxWeightIndex = getMaxWeightIndex(maxWeights);
-
-  let firstTeam = true;
-  while (weights[0].length) {
-    const addTeams = addToTeams(weights, maxWeightIndex, teams, firstTeam);
-    weights = addTeams.weights;
-    teams = addTeams.newTeams;
-    maxWeights[maxWeightIndex].value = 0;
-    maxWeightIndex = getMaxWeightIndex(maxWeights);
-    firstTeam = weights[0].length === 6 ? firstTeam : !firstTeam;// !firstTeam;
-  }
+  // const maxWeights = getMaxWeights(weights);
+  //
+  // let maxWeightIndex = getMaxWeightIndex(maxWeights);
+  //
+  // let firstTeam = true;
+  // while (weights[0].length) {
+  //   const addTeams = addToTeams(weights, maxWeightIndex, teams, firstTeam);
+  //   weights = addTeams.weights;
+  //   teams = addTeams.newTeams;
+  //   maxWeights[maxWeightIndex].value = 0;
+  //   maxWeightIndex = getMaxWeightIndex(maxWeights);
+  //   firstTeam = weights[0].length === 6 ? firstTeam : !firstTeam;// !firstTeam;
+  // }
 
   console.log(teams);
 

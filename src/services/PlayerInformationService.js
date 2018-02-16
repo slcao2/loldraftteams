@@ -45,12 +45,12 @@ const calculateEffectiveSummonerRank = (summoner, ranked, soloMatch, flexMatch) 
     RankedTierEnum[currentSoloRank].ordinal >= RankedTierEnum[lastSoloRank].ordinal) {
     return currentSoloRank;
   } else if (lastSoloRank && lastSoloRank !== RankedTierEnum.UNRANKED.name) {
-    return RankedTierEnum[lastSoloRank] === RankedTierEnum.MASTER || RankedTierEnum[lastSoloRank] === RankedTierEnum.CHALLENGER ? `${lastSoloRank}_I` : `${lastSoloRank}_III`;
+    return RankedTierEnum[lastSoloRank] === RankedTierEnum.MASTER || RankedTierEnum[lastSoloRank] === RankedTierEnum.CHALLENGER ? `${lastSoloRank}_I` : `${lastSoloRank}_V`;
   } else if (currentFlexRank && currentFlexRank !== RankedTierEnum.UNRANKED.name &&
     RankedTierEnum[currentFlexRank].ordinal >= RankedTierEnum[lastFlexRank].ordinal) {
     return currentFlexRank;
   } else if (lastFlexRank && lastFlexRank !== RankedTierEnum.UNRANKED.name) {
-    return RankedTierEnum[lastFlexRank] === RankedTierEnum.MASTER || RankedTierEnum[lastFlexRank] === RankedTierEnum.CHALLENGER ? `${lastFlexRank}_I` : `${lastFlexRank}_III`;
+    return RankedTierEnum[lastFlexRank] === RankedTierEnum.MASTER || RankedTierEnum[lastFlexRank] === RankedTierEnum.CHALLENGER ? `${lastFlexRank}_I` : `${lastFlexRank}_V`;
   }
   return RankedTierEnum.UNRANKED.name;
 };
@@ -163,20 +163,6 @@ const calculateDefaultPositions = (soloList, flexList, draftList, blindList) => 
   return applyWeightedPositions(weightedPositions);
 };
 
-const getChampionMasteryNames = async (masteryData) => {
-  const masteryList = [];
-  console.log(await RiotAPIService.getStaticChampionData());
-  // masteryData.map(async (mastery) => {
-  //   const championInfo = await RiotAPIService.getStaticChampionData(mastery.championId);
-  //   masteryList.push({
-  //     name: championInfo.name,
-  //     level: mastery.championLevel,
-  //     points: mastery.championPoints,
-  //   });
-  // });
-  return masteryList;
-};
-
 const getPlayerData = async (summonerName) => {
   const summonerData = await RiotAPIService.getSummonerData(summonerName);
   const rankedData = summonerData ? await RiotAPIService.getRankedData(summonerData.id) : undefined;
@@ -210,12 +196,9 @@ const getPlayerData = async (summonerName) => {
     draftMatchData ? draftMatchData.matches : undefined,
     blindMatchData ? blindMatchData.matches : undefined,
   );
-  // const masteryList = getChampionMasteryNames(_.slice(championMasteryData, 0, 5));
-
   playerData.summonerName = summonerData.name;
   playerData.rank = RankedTierEnum[effectiveRank].shortName;
   playerData.roles = defaultPositions;
-  // playerData.mastery = masteryList;
 
   console.log(playerData);
   return playerData;

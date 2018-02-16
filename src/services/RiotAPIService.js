@@ -14,7 +14,7 @@ import {
 
 const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
-const apiKey = 'RGAPI-433c87dc-bad1-4925-ad6f-842a5eaad3b0';
+const apiKey = 'RGAPI-027ed16b-e0c9-424c-8b90-3670889fc93c';
 
 // TODO: Create promise handler for errors from request
 const promiseWithErrorHandler = options => new Promise((resolve, reject) => {

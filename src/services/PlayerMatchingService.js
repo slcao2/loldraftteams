@@ -25,21 +25,6 @@ const getMaxWeightValue = (weights) => {
   return weights.find(value => max === value.value);
 };
 
-const addPlayerToTeam = (weights, maxIndex, teams, toggle) => {
-  const maxInRole = getMaxWeightValue(weights[maxIndex]);
-  maxInRole.role = mapIndexToRole(maxIndex);
-  if (toggle) {
-    teams.teamOne.push(maxInRole);
-  } else {
-    teams.teamTwo.push(maxInRole);
-  }
-  const newWeights = removePlayer(maxInRole.name, weights);
-  return {
-    newTeams: teams,
-    weights: newWeights,
-  };
-};
-
 // true is teamOne, false is teamTwo
 const addToTeams = (weights, maxIndex, teams, firstTeam) => {
   const firstPlayerAdded = addPlayerToTeam(weights, maxIndex, teams, firstTeam);
@@ -76,6 +61,8 @@ const getWeightedRoleValues = (players, role) => {
   return weightedValues;
 };
 
+const addPlayerToTeam = (player, team) => update(team, { $push: [player] });
+
 const removePlayerFromWeights = (weights, playerName) => {
   const newWeights = weights.map(roleArr => _.filter(roleArr, player => player.name !== playerName));
   return newWeights;
@@ -93,6 +80,19 @@ const getMaxWeightPlayer = (weights) => {
     }
   });
   return maxPlayer;
+};
+
+const addPlayersToTeams = (weights, teams) => {
+  let isFirstTeam = true;
+  let newTeams = update(teams, { $merge: {} });
+  let newWeights = update(weights, { $merge: [] });
+  while (newWeights[0].length) {
+    const maxPlayer = getMaxWeightPlayer(newWeights);
+    newTeams = addPlayerToTeam(maxPlayer, isFirstTeam ? newTeams.teamOne : newTeams.teamTwo);
+    newWeights = removePlayerFromWeights(weights, maxPlayer.name);
+    isFirstTeam = !isFirstTeam;
+  }
+  return newTeams;
 };
 
 const getTeamPlayers = (players) => {
@@ -113,6 +113,9 @@ const getTeamPlayers = (players) => {
   const startWeights = [topWeights, jungleWeights, midWeights, duoCarryWeights, duoSupportWeights];
   console.log(...startWeights);
 
+  const newTeams = addPlayersToTeams(startWeights, teams);
+
+  console.log(newTeams);
   console.log(getMaxWeightPlayer(startWeights));
   console.log(removePlayerFromWeights(startWeights, 'r4nc0r'));
 

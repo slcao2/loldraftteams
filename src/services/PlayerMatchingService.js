@@ -25,13 +25,6 @@ const getMaxWeightValue = (weights) => {
   return weights.find(value => max === value.value);
 };
 
-// true is teamOne, false is teamTwo
-const addToTeams = (weights, maxIndex, teams, firstTeam) => {
-  const firstPlayerAdded = addPlayerToTeam(weights, maxIndex, teams, firstTeam);
-  const secondPlayerAdded = addPlayerToTeam(firstPlayerAdded.weights, maxIndex, firstPlayerAdded.newTeams, !firstTeam);
-  return secondPlayerAdded;
-};
-
 const getMaxWeightIndex = (weights) => {
   let max = 0;
   weights.forEach((role) => {
@@ -61,21 +54,26 @@ const getWeightedRoleValues = (players, role) => {
   return weightedValues;
 };
 
-const addPlayerToTeam = (player, team) => update(team, { $push: [player] });
-
 const removePlayerFromWeights = (weights, playerName) => {
   const newWeights = weights.map(roleArr => _.filter(roleArr, player => player.name !== playerName));
   return newWeights;
 };
 
+const getMaxWeightPlayerForRole = (weights, roleIndex) => {
+  const roleWeights = weights[roleIndex];
+  let max = { value: 0 };
+  roleWeights.forEach((player) => {
+    max = player.value >= max.value ? player : max;
+  });
+  max = update(max, { role: { $set: mapIndexToRole(roleIndex) } });
+  return max;
+};
+
 const getMaxWeightPlayer = (weights) => {
   let maxPlayer = { value: 0 };
   weights.forEach((roleArr, index) => {
-    let max = { value: 0 };
-    roleArr.forEach((player) => {
-      max = player.value > max.value ? player : max;
-    });
-    if (max.value > maxPlayer.value) {
+    const max = getMaxWeightPlayerForRole(weights, index);
+    if (max.value >= maxPlayer.value) {
       maxPlayer = update(max, { role: { $set: mapIndexToRole(index) } });
     }
   });
@@ -88,8 +86,11 @@ const addPlayersToTeams = (weights, teams) => {
   let newWeights = update(weights, { $merge: [] });
   while (newWeights[0].length) {
     const maxPlayer = getMaxWeightPlayer(newWeights);
-    newTeams = addPlayerToTeam(maxPlayer, isFirstTeam ? newTeams.teamOne : newTeams.teamTwo);
-    newWeights = removePlayerFromWeights(weights, maxPlayer.name);
+    newTeams = update(newTeams, isFirstTeam ? { teamOne: { $push: [maxPlayer] } } : { teamTwo: { $push: [maxPlayer] } }); // addPlayerToTeam(maxPlayer, isFirstTeam ? newTeams.teamOne : newTeams.teamTwo);
+    newWeights = removePlayerFromWeights(newWeights, maxPlayer.name);
+    const secondMaxPlayer = getMaxWeightPlayerForRole(newWeights, mapRoleToIndex(maxPlayer.role));
+    newTeams = update(newTeams, isFirstTeam ? { teamTwo: { $push: [secondMaxPlayer] } } : { teamOne: { $push: [secondMaxPlayer] } });
+    newWeights = removePlayerFromWeights(newWeights, secondMaxPlayer.name);
     isFirstTeam = !isFirstTeam;
   }
   return newTeams;
@@ -115,10 +116,6 @@ const getTeamPlayers = (players) => {
 
   const newTeams = addPlayersToTeams(startWeights, teams);
 
-  console.log(newTeams);
-  console.log(getMaxWeightPlayer(startWeights));
-  console.log(removePlayerFromWeights(startWeights, 'r4nc0r'));
-
   /*
   Get the role that has the highest value in it.
   Put that highest value in one team, and then the closest to that value on the other team.
@@ -138,11 +135,11 @@ const getTeamPlayers = (players) => {
   //   firstTeam = weights[0].length === 6 ? firstTeam : !firstTeam;// !firstTeam;
   // }
 
-  console.log(teams);
+  console.log(newTeams);
 
   // TODO: Doesn't work if the sameTeam players are playing in the same role on opposite teams.
   // teams = resolveLinkedPlayer(players, teams);
-  return teams;
+  return newTeams;
 };
 
 export default {

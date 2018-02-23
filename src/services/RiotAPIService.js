@@ -14,7 +14,7 @@ import {
 
 const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
-const apiKey = 'RGAPI-027ed16b-e0c9-424c-8b90-3670889fc93c';
+const apiKey = 'RGAPI-30cad67c-b210-445a-9e28-759429f681d6';
 
 // TODO: Create promise handler for errors from request
 const promiseWithErrorHandler = options => new Promise((resolve, reject) => {
@@ -93,7 +93,7 @@ const getChampionMasteryData = (summonerId) => {
 
 const getStaticChampionData = (championId) => {
   const options = {
-    url: corsProxy + 'http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json', // corsProxy + NA + STATIC_CHAMPION_ENDPOINT + championId,
+    url: `${corsProxy }http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json`, // corsProxy + NA + STATIC_CHAMPION_ENDPOINT + championId,
     method: 'GET',
     headers: {
       'X-Riot-Token': apiKey,

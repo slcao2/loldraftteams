@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 
 import { RECEIVE_SEARCH_RESPONSE, START_SEARCH_REQUEST } from '../actions/searchActions';
-import { lowerCaseTrim } from '../utilities/StringUtils';
+import { lowerCaseRemoveSpaces } from '../utilities/StringUtils';
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -14,7 +14,7 @@ export default (state = [], action) => {
         }],
       });
     case RECEIVE_SEARCH_RESPONSE: {
-      const searchIndex = state.findIndex(request => lowerCaseTrim(request.value) === lowerCaseTrim(action.player));
+      const searchIndex = state.findIndex(request => lowerCaseRemoveSpaces(request.value) === lowerCaseRemoveSpaces(action.player));
       return update(state, { [searchIndex]: { isFetching: { $set: false } } });
     }
     default:

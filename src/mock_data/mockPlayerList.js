@@ -63,7 +63,7 @@ Proceed with normal PlayerMatchingService.
 After teams are created, swap player from one team with the other player in the same position.
  */
 
-const mockPlayers = [
+const mockPlayerList = [
   {
     summonerName: 'r4nc0r',
     rank: 'D3',
@@ -136,4 +136,9 @@ const mockPlayers = [
   },
 ];
 
-export default mockPlayers;
+const mirrorTeamsOnlySingleRolePlayerList = [
+    
+];
+
+export default mockPlayerList;
+

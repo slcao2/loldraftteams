@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import PlayerMatchingService from './services/PlayerMatchingService';
-import mockPlayers from './constants/mockPlayers';
+import mockPlayerList from './mock_data/mockPlayerList';
 import MainPage from './components/MainPage';
 
 class App extends Component {
   render() {
-    PlayerMatchingService.getTeamPlayers(mockPlayers);
+    PlayerMatchingService.getTeamPlayers(mockPlayerList);
 
     return (
       <div>

@@ -11,7 +11,7 @@ const state = {
     {
       summonerName: '',
       rank: '',
-      roleValues: [0, 0, 0, 0, 0],
+      roles: [0, 0, 0, 0, 0],
     },
   ],
   teamList: {

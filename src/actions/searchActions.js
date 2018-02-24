@@ -1,4 +1,5 @@
 import PlayerInformationService from '../services/PlayerInformationService';
+import { removePlayer } from './playerListActions';
 
 export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
 export const RESET_SEARCH_VALUE = 'RESET_SEARCH_VALUE';
@@ -35,6 +36,8 @@ export function requestSearchPlayer(searchValue) {
         dispatch(addPlayer(response));
       },
       (error) => {
+        dispatch(receiveSearchResponse(searchValue));
+        dispatch(removePlayer({ summonerName: searchValue }));
         console.log(error);
       },
     );

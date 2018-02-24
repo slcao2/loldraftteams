@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import RiotAPIService from './RiotAPIService';
 import {
   SR_BLIND_ID,
@@ -97,12 +96,6 @@ const combineAndWeightPositionCounts = (solo, flex, draft, blind) => {
   return (solo * soloWeight) + (flex * flexWeight) + (draft * draftWeight) + (blind * blindWeight);
 };
 
-const getHighestPercentagePosition = (positions) => {
-  const maxPercentage = Math.max(...positions);
-  const maxIndex = positions.findIndex(role => role === maxPercentage);
-  return maxIndex;
-};
-
 const applyWeightedPositions = (positions) => {
   const totalPoints = positions.TOP + positions.JUNGLE + positions.MID +
     positions.DUO_CARRY + positions.DUO_SUPPORT;
@@ -180,8 +173,6 @@ const getPlayerData = async (summonerName) => {
     await RiotAPIService.getMatchData(rankedSoloMatchData.matches[0].gameId) : undefined;
   const latestFlexMatchData = rankedFlexMatchData ?
     await RiotAPIService.getMatchData(rankedFlexMatchData.matches[0].gameId) : undefined;
-  const championMasteryData = summonerData ?
-    await RiotAPIService.getChampionMasteryData(summonerData.id) : undefined;
 
   const playerData = {};
   const effectiveRank = calculateEffectiveSummonerRank(

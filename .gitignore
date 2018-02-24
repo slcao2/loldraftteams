@@ -22,3 +22,5 @@ yarn-error.log*
 
 .sass-cache/
 .idea/
+/public/main.css.map
+package-lock.json

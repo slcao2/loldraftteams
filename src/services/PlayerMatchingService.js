@@ -55,7 +55,7 @@ const addPlayersToTeams = (weights, teams) => {
   let isFirstTeam = true;
   let newTeams = update(teams, { $merge: {} });
   let newWeights = update(weights, { $merge: [] });
-  
+
   while (_.flatten(newWeights).length) {
     const maxPlayer = getMaxWeightPlayer(newWeights);
     newTeams = update(newTeams, isFirstTeam ? { teamOne: { $push: [maxPlayer] } } : { teamTwo: { $push: [maxPlayer] } });
@@ -67,6 +67,11 @@ const addPlayersToTeams = (weights, teams) => {
     isFirstTeam = !isFirstTeam;
   }
   return newTeams;
+};
+
+const sortTeamByRole = (team) => {
+  const compareRole = (playerOne, playerTwo) => mapRoleToIndex(playerOne.role) - mapRoleToIndex(playerTwo.role);
+  team.sort(compareRole);
 };
 
 const getTeamPlayers = (players) => {
@@ -88,6 +93,8 @@ const getTeamPlayers = (players) => {
   console.log(...startWeights);
 
   const newTeams = addPlayersToTeams(startWeights, teams);
+  sortTeamByRole(newTeams.teamOne);
+  sortTeamByRole(newTeams.teamTwo);
 
   console.log(newTeams);
   return newTeams;

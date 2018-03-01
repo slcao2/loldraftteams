@@ -7,7 +7,7 @@ const Team = ({ teamName, team }) => {
   const players = team.map(player => (
     <li key={player.name} className="list-group-item">
       <div>{player.name}</div>
-      <div>{player.role}</div>
+      {/* <div>{player.role}</div> */}
     </li>));
 
   return (

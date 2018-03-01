@@ -1,0 +1,18 @@
+[
+    {
+        "queueType": "RANKED_FLEX_SR",
+        "hotStreak": false,
+        "wins": 33,
+        "veteran": false,
+        "losses": 36,
+        "playerOrTeamId": "35022864",
+        "leagueName": "Twitch's Swarm",
+        "playerOrTeamName": "r4nc0r",
+        "inactive": false,
+        "rank": "IV",
+        "freshBlood": false,
+        "leagueId": "161252a0-031b-11e8-b72a-c81f66dbb56c",
+        "tier": "PLATINUM",
+        "leaguePoints": 74
+    }
+]

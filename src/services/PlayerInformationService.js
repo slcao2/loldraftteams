@@ -1,4 +1,4 @@
-import RiotAPIService from './RiotAPIService';
+import AwsApiService from './AwsApiService';
 import {
   SR_BLIND_ID,
   SR_DRAFT_ID,
@@ -157,22 +157,22 @@ const calculateDefaultPositions = (soloList, flexList, draftList, blindList) => 
 };
 
 const getPlayerData = async (summonerName) => {
-  const summonerData = await RiotAPIService.getSummonerData(summonerName);
-  const rankedData = summonerData ? await RiotAPIService.getRankedData(summonerData.id) : undefined;
+  const summonerData = await AwsApiService.getSummonerData(summonerName);
+  const rankedData = summonerData ? await AwsApiService.getRankedData(summonerData.name, summonerData.id) : undefined;
 
   const rankedSoloMatchData = summonerData ?
-    await RiotAPIService.getMatchListForQueue(summonerData.accountId, RANKED_SOLO_ID) : undefined;
+    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, RANKED_SOLO_ID) : undefined;
   const rankedFlexMatchData = summonerData ?
-    await RiotAPIService.getMatchListForQueue(summonerData.accountId, RANKED_FLEX_ID) : undefined;
+    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, RANKED_FLEX_ID) : undefined;
   const blindMatchData = summonerData ?
-    await RiotAPIService.getMatchListForQueue(summonerData.accountId, SR_BLIND_ID) : undefined;
+    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_BLIND_ID) : undefined;
   const draftMatchData = summonerData ?
-    await RiotAPIService.getMatchListForQueue(summonerData.accountId, SR_DRAFT_ID) : undefined;
+    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_DRAFT_ID) : undefined;
 
   const latestSoloMatchData = rankedSoloMatchData ?
-    await RiotAPIService.getMatchData(rankedSoloMatchData.matches[0].gameId) : undefined;
+    await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID) : undefined;
   const latestFlexMatchData = rankedFlexMatchData ?
-    await RiotAPIService.getMatchData(rankedFlexMatchData.matches[0].gameId) : undefined;
+    await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID) : undefined;
 
   const playerData = {};
   const effectiveRank = calculateEffectiveSummonerRank(

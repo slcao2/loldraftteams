@@ -1,11 +1,11 @@
 // Regional Endpoints
-export const NA = 'https://na1.api.riotgames.com';
+export const BASE_ENDPOINT = 'https://bts0d23u7i.execute-api.us-east-1.amazonaws.com/prod';
 
 // API Endpoints
-export const SUMMONER_NAME_ENDPOINT = '/lol/summoner/v3/summoners/by-name/';
-export const RANKED_POSITION_ENDPOINT = '/lol/league/v3/positions/by-summoner/';
-export const MATCH_LIST_ENDPOINT = '/lol/match/v3/matchlists/by-account/';
-export const MATCH_ENDPOINT = '/lol/match/v3/matches/';
+export const SUMMONER_NAME_ENDPOINT = '/summoner';
+export const RANKED_POSITION_ENDPOINT = '/league';
+export const MATCH_LIST_ENDPOINT = '/matchlist';
+export const MATCH_ENDPOINT = '/match';
 export const CHAMPION_MASTERY_ENDPOINT = '/lol/champion-mastery/v3/champion-masteries/by-summoner/';
 export const STATIC_CHAMPION_ENDPOINT = '/lol/static-data/v3/champions/';
 

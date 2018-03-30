@@ -10,10 +10,10 @@ export const CHAMPION_MASTERY_ENDPOINT = '/lol/champion-mastery/v3/champion-mast
 export const STATIC_CHAMPION_ENDPOINT = '/lol/static-data/v3/champions/';
 
 // Matchmaking Queues
-export const SR_DRAFT_ID = 400;
-export const RANKED_SOLO_ID = 420;
-export const SR_BLIND_ID = 430;
-export const RANKED_FLEX_ID = 440;
+export const SR_DRAFT_ID = '400';
+export const RANKED_SOLO_ID = '420';
+export const SR_BLIND_ID = '430';
+export const RANKED_FLEX_ID = '440';
 
 // Ranked Type
 export const RANKED_SOLO_5x5 = 'RANKED_SOLO_5x5';
@@ -29,10 +29,13 @@ export const DUO_CARRY = 'DUO_CARRY';
 export const DUO_SUPPORT = 'DUO_SUPPORT';
 
 // Response Codes
-export const BAD_REQUEST = 400;
-export const FORBIDDEN = 403;
-export const NOT_FOUND = 404;
-export const RATE_LIMIT_EXCEEDED = 429;
+export const BAD_REQUEST = '400';
+export const FORBIDDEN = '403';
+export const NOT_FOUND = '404';
+export const RATE_LIMIT_EXCEEDED = '429';
+
+// Required Fields
+export const REQUIRED_FIELDS = ['name', 'league', 'soloMatchList', 'flexMatchList', 'draftMatchList', 'blindMatchList', 'soloMatch', 'flexMatch'];
 
 export const mapRoleToIndex = (role) => {
   switch (role) {

@@ -1,6 +1,5 @@
 import request from 'request';
 import {
-  CHAMPION_MASTERY_ENDPOINT,
   MATCH_ENDPOINT,
   MATCH_LIST_ENDPOINT,
   RANKED_POSITION_ENDPOINT,

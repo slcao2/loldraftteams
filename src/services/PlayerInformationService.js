@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import AwsApiService from './AwsApiService';
 import {
   SR_BLIND_ID,
@@ -12,6 +13,7 @@ import {
   BOTTOM,
   DUO_CARRY,
   DUO_SUPPORT,
+  REQUIRED_FIELDS,
 } from '../constants/riotConstants';
 import RankedTierEnum from '../constants/RankedTierEnum';
 
@@ -156,23 +158,54 @@ const calculateDefaultPositions = (soloList, flexList, draftList, blindList) => 
   return applyWeightedPositions(weightedPositions);
 };
 
+const hasRequiredData = (summonerData) => {
+  let containsRequiredData = true;
+  const summonerDataKeys = _.keys(summonerData);
+  REQUIRED_FIELDS.forEach((field) => {
+    if (!summonerDataKeys.includes(field)) {
+      containsRequiredData = false;
+    }
+  });
+  return containsRequiredData;
+};
+
 const getPlayerData = async (summonerName) => {
+  let rankedData;
+  let rankedSoloMatchData;
+  let rankedFlexMatchData;
+  let draftMatchData;
+  let blindMatchData;
+  let latestSoloMatchData;
+  let latestFlexMatchData;
   const summonerData = await AwsApiService.getSummonerData(summonerName);
-  const rankedData = summonerData ? await AwsApiService.getRankedData(summonerData.name, summonerData.id) : undefined;
 
-  const rankedSoloMatchData = summonerData ?
-    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, RANKED_SOLO_ID) : undefined;
-  const rankedFlexMatchData = summonerData ?
-    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, RANKED_FLEX_ID) : undefined;
-  const blindMatchData = summonerData ?
-    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_BLIND_ID) : undefined;
-  const draftMatchData = summonerData ?
-    await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_DRAFT_ID) : undefined;
+  if (hasRequiredData(summonerData)) {
+    rankedData = summonerData.league;
 
-  const latestSoloMatchData = rankedSoloMatchData ?
-    await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID) : undefined;
-  const latestFlexMatchData = rankedFlexMatchData ?
-    await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID) : undefined;
+    rankedSoloMatchData = summonerData.soloMatchList;
+    rankedFlexMatchData = summonerData.flexMatchList;
+    draftMatchData = summonerData.draftMatchList;
+    blindMatchData = summonerData.blindMatchList;
+
+    latestSoloMatchData = summonerData.soloMatch;
+    latestFlexMatchData = summonerData.flexMatch;
+  } else {
+    rankedData = summonerData ? await AwsApiService.getRankedData(summonerData.name, summonerData.id) : undefined;
+
+    rankedSoloMatchData = summonerData ?
+      await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, RANKED_SOLO_ID) : undefined;
+    rankedFlexMatchData = summonerData ?
+      await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, RANKED_FLEX_ID) : undefined;
+    blindMatchData = summonerData ?
+      await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_BLIND_ID) : undefined;
+    draftMatchData = summonerData ?
+      await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_DRAFT_ID) : undefined;
+
+    latestSoloMatchData = rankedSoloMatchData ?
+      await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID) : undefined;
+    latestFlexMatchData = rankedFlexMatchData ?
+      await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID) : undefined;
+  }
 
   const playerData = {};
   const effectiveRank = calculateEffectiveSummonerRank(
@@ -191,7 +224,6 @@ const getPlayerData = async (summonerName) => {
   playerData.rank = RankedTierEnum[effectiveRank].shortName;
   playerData.roles = defaultPositions;
 
-  console.log(playerData);
   return playerData;
 };
 

@@ -38,7 +38,6 @@ export function requestSearchPlayer(searchValue) {
       (error) => {
         dispatch(receiveSearchResponse(searchValue));
         dispatch(removePlayer({ summonerName: searchValue }));
-        console.log(error);
       },
     );
   };

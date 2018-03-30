@@ -90,13 +90,11 @@ const getTeamPlayers = (players) => {
   const duoCarryWeights = getWeightedRoleValues(players, DUO_CARRY);
   const duoSupportWeights = getWeightedRoleValues(players, DUO_SUPPORT);
   const startWeights = [topWeights, jungleWeights, midWeights, duoCarryWeights, duoSupportWeights];
-  console.log(...startWeights);
 
   const newTeams = addPlayersToTeams(startWeights, teams);
   sortTeamByRole(newTeams.teamOne);
   sortTeamByRole(newTeams.teamTwo);
 
-  console.log(newTeams);
   return newTeams;
 };
 

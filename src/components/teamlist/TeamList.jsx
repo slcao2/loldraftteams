@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 
 import Team from './Team';
 
+const mockTeams = {
+  teamOne: [{ name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }],
+  teamTwo: [{ name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'TOP' }],
+};
+
 const TeamList = ({ teams }) => (
-  <div className="row">
-    <div className="col-md-6">
+  <div className="teams">
+    <div className="team-list">
       <Team teamName="Team One" team={teams.teamOne} />
     </div>
-    <div className="col-md-6">
+    <div className="team-list">
       <Team teamName="Team Two" team={teams.teamTwo} />
     </div>
   </div>

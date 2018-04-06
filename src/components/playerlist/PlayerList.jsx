@@ -7,26 +7,27 @@ import RankedTierEnum from '../../constants/RankedTierEnum';
 const PlayerList = ({ players, handleRemoveClick }) => {
   const getRankColorClass = (rank) => {
     const rankPrefix = rank.substring(0, 1);
+    const classPrefix = 'player-background';
 
     switch (rankPrefix) {
       case RankedTierEnum.UNRANKED.shortName:
-        return 'player-background-unranked';
+        return `${classPrefix}-unranked`;
       case RankedTierEnum.BRONZE.shortName:
-        return 'player-background-bronze';
+        return `${classPrefix}-bronze`;
       case RankedTierEnum.SILVER.shortName:
-        return 'player-background-silver';
+        return `${classPrefix}-silver`;
       case RankedTierEnum.GOLD.shortName:
-        return 'player-background-gold';
+        return `${classPrefix}-gold`;
       case RankedTierEnum.PLATINUM.shortName:
-        return 'player-background-platinum';
+        return `${classPrefix}-platinum`;
       case RankedTierEnum.DIAMOND.shortName:
-        return 'player-background-diamond';
+        return `${classPrefix}-diamond`;
       case RankedTierEnum.MASTER.shortName:
-        return 'player-background-master';
+        return `${classPrefix}-master`;
       case RankedTierEnum.CHALLENGER.shortName:
-        return 'player-background-challenger';
+        return `${classPrefix}-challenger`;
       default:
-        return 'player-background';
+        return classPrefix;
     }
   };
 

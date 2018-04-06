@@ -6,18 +6,16 @@ import PlayerSearchContainer from './playerlist/PlayerSearchContainer';
 import PlayerListContainer from './playerlist/PlayerListContainer';
 
 const MainPage = () => (
-  <div className="container">
-    <div className="row">
-      <div className="col-md-5">
-        <PlayerSearchContainer />
-        <PlayerListContainer />
-        <SubmitPlayersButtonContainer />
-      </div>
-      <div className="col-md-7">
-        <TeamListContainer />
-      </div>
-    </div >
-  </div>
+  <div className="main-container">
+    <div className="players-list">
+      <PlayerSearchContainer />
+      <PlayerListContainer />
+      <SubmitPlayersButtonContainer />
+    </div>
+    <div className="teams-list">
+      <TeamListContainer />
+    </div>
+  </div >
 );
 
 export default MainPage;

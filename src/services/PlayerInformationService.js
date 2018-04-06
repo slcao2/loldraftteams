@@ -14,6 +14,7 @@ import {
   DUO_CARRY,
   DUO_SUPPORT,
   REQUIRED_FIELDS,
+  MATCH_FIELDS,
 } from '../constants/riotConstants';
 import RankedTierEnum from '../constants/RankedTierEnum';
 
@@ -169,6 +170,17 @@ const hasRequiredData = (summonerData) => {
   return containsRequiredData;
 };
 
+const hasMatchData = (summonerData) => {
+  let containsRequiredData = true;
+  const summonerDataKeys = _.keys(summonerData);
+  MATCH_FIELDS.forEach((field) => {
+    if (!summonerDataKeys.includes(field)) {
+      containsRequiredData = false;
+    }
+  });
+  return containsRequiredData;
+}
+
 const getPlayerData = async (summonerName) => {
   let rankedData;
   let rankedSoloMatchData;
@@ -187,8 +199,15 @@ const getPlayerData = async (summonerName) => {
     draftMatchData = summonerData.draftMatchList;
     blindMatchData = summonerData.blindMatchList;
 
-    latestSoloMatchData = summonerData.soloMatch;
-    latestFlexMatchData = summonerData.flexMatch;
+    if (hasMatchData(summonerData)) {
+      latestSoloMatchData = summonerData.soloMatch;
+      latestFlexMatchData = summonerData.flexMatch;
+    } else {
+      latestSoloMatchData = rankedSoloMatchData ?
+        await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID) : undefined;
+      latestFlexMatchData = rankedFlexMatchData ?
+        await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID) : undefined;
+    }
   } else {
     rankedData = summonerData ? await AwsApiService.getRankedData(summonerData.name, summonerData.id) : undefined;
 
@@ -200,7 +219,7 @@ const getPlayerData = async (summonerName) => {
       await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_BLIND_ID) : undefined;
     draftMatchData = summonerData ?
       await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_DRAFT_ID) : undefined;
-
+      
     latestSoloMatchData = rankedSoloMatchData ?
       await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID) : undefined;
     latestFlexMatchData = rankedFlexMatchData ?

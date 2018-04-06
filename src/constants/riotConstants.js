@@ -29,13 +29,21 @@ export const DUO_CARRY = 'DUO_CARRY';
 export const DUO_SUPPORT = 'DUO_SUPPORT';
 
 // Response Codes
-export const BAD_REQUEST = '400';
-export const FORBIDDEN = '403';
-export const NOT_FOUND = '404';
-export const RATE_LIMIT_EXCEEDED = '429';
+export const BAD_REQUEST = 400;
+export const UNAUTHORIZED = 401;
+export const FORBIDDEN = 403;
+export const NOT_FOUND = 404;
+export const METHOD_NOT_ALLOWED = 405;
+export const UNSUPPORTED_MEDIA_TYPE = 415;
+export const RATE_LIMIT_EXCEEDED = 429;
+export const INTERNAL_SERVER_ERROR = 500;
+export const BAD_GATEWAY = 502;
+export const SERVICE_UNAVAILABLE = 503;
+export const GATEWAY_TIMEOUT = 504;
 
 // Required Fields
-export const REQUIRED_FIELDS = ['name', 'league', 'soloMatchList', 'flexMatchList', 'draftMatchList', 'blindMatchList', 'soloMatch', 'flexMatch'];
+export const REQUIRED_FIELDS = ['name', 'league', 'soloMatchList', 'flexMatchList', 'draftMatchList', 'blindMatchList'];
+export const MATCH_FIELDS = ['soloMatch', 'flexMatch'];
 
 export const mapRoleToIndex = (role) => {
   switch (role) {

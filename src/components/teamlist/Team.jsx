@@ -7,13 +7,13 @@ const Team = ({ teamName, team }) => {
   const players = team.map(player => (
     <li key={player.name} className="list-group-item">
       <div>{player.name}</div>
-      {/* <div>{player.role}</div> */}
+      <div>sugg: {player.role}</div>
     </li>));
 
   return (
     <div>
       {teamName}
-      <ul className="list-group list-group-flush">
+      <ul className="list-group">
         {players}
       </ul>
     </div>

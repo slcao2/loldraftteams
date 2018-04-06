@@ -7,12 +7,51 @@ $diamond-color: #E3F2FD;
 $master-color: #F3E5F5;
 $challenger-color: #FFEBEE;
 
-.search-box {
-  width: 100%;
+.player {
+  display: flex;
+  flex-direction: row;
+
+  .rank {
+    text-align: center;
+    flex: 2;
+  }
+
+  .summoner-name {
+    flex: 8;
+  }
+
+  .prefix-icon {
+    flex: 1;
+  }
 }
 
-.player-rank {
-  text-align: center;
+.teams {
+  display: flex;
+  flex-direction: row;
+
+  .team-list {
+    flex: 1;
+  }
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10%;
+  
+  .players-list {
+    flex: 5;
+    margin: 0 10px;
+  }
+
+  .teams-list {
+    flex: 7;
+    margin: 0 10px;
+  }
+}
+
+.search-box {
+  width: 100%;
 }
 
 .player-background {

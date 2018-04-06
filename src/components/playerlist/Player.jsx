@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Player = ({ player, handleRemoveClick }) => {
-  const renderX = player.rank ? (<div className="col-xs-1"><i className="fa fa-times fa-lg" aria-hidden="true" onClick={event => (handleRemoveClick(player))} /></div>) : '';
-  const renderEllipsis = player.rank ? '' : (<div className="col-xs-1"><i className="fa fa-spinner fa-lg animated-rotation" aria-hidden="true" /></div>);
+  const renderX = player.rank ? (<div className="prefix-icon"><i className="fa fa-times fa-lg" aria-hidden="true" onClick={event => (handleRemoveClick(player))} /></div>) : '';
+  const renderSpinner = player.rank ? '' : (<div className="prefix-icon"><i className="fa fa-spinner fa-lg animated-rotation" aria-hidden="true" /></div>);
 
   return (
-    <div className="row">
+    <div className="player">
       {renderX}
-      {renderEllipsis}
-      <div className="col-xs-2 player-rank">{player.rank}</div>
-      <div className="col-xs-7">{player.summonerName}</div>
+      {renderSpinner}
+      <div className="rank">{player.rank}</div>
+      <div className="summoner-name">{player.summonerName}</div>
     </div>
   );
 };

@@ -1,29 +1,11 @@
-import request from 'request';
 import {
   MATCH_ENDPOINT,
   MATCH_LIST_ENDPOINT,
   RANKED_POSITION_ENDPOINT,
   SUMMONER_NAME_ENDPOINT,
   BASE_ENDPOINT,
-  RATE_LIMIT_EXCEEDED,
-  NOT_FOUND,
-  FORBIDDEN, BAD_REQUEST,
 } from '../constants/riotConstants';
-
-// TODO: Create promise handler for errors from request
-const promiseWithErrorHandler = options => new Promise((resolve, reject) => {
-  request(options, (error, response, body) => {
-    if (response.statusCode === RATE_LIMIT_EXCEEDED) {
-      reject(new Error('Rate limit exceeded. Please try again in 2 minutes'));
-    } else if (response.statusCode === FORBIDDEN) {
-      reject(new Error('API key expired. Generate new api key.'));
-    } else if (response.statusCode === NOT_FOUND || response.statusCode === BAD_REQUEST) {
-      resolve(undefined);
-    }
-    resolve(JSON.parse(body));
-  });
-});
-
+import { promiseWithErrorHandler } from '../utilities/HttpUtils';
 
 const getSummonerData = (summonerName) => {
   const options = {

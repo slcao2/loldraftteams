@@ -1,5 +1,8 @@
 const state = {
-  searchUIValue: '',
+  searchUIValue: {
+    value: '',
+    enabled: true,
+  },
   searchRequest: [
     {
       isFetching: false,

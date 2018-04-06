@@ -1,11 +1,22 @@
-import { RESET_SEARCH_VALUE, SET_SEARCH_VALUE } from '../actions/searchActions';
+import update from 'immutability-helper';
 
-export default (state = '', action) => {
+import { RESET_SEARCH_VALUE, SET_SEARCH_VALUE, SET_SEARCH_ENABLED, SET_SEARCH_DISABLED } from '../actions/searchActions';
+
+export default (state = {
+  value: '',
+  enabled: true,
+}, action) => {
   switch (action.type) {
     case SET_SEARCH_VALUE:
-      return action.value;
+      return update(state, { value: { $set: action.value } });
     case RESET_SEARCH_VALUE:
-      return '';
+      return update(state, { value: { $set: '' } });
+    case SET_SEARCH_ENABLED:
+      console.log('enabled');
+      return update(state, { enabled: { $set: true } });
+    case SET_SEARCH_DISABLED:
+      console.log('disabled');
+      return update(state, { enabled: { $set: false } });
     default:
       return state;
   }

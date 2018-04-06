@@ -8,7 +8,8 @@ import {
 } from '../../actions/searchActions';
 
 const mapStateToProps = state => ({
-  searchValue: state.searchUIValue,
+  searchValue: state.searchUIValue.value,
+  enabled: state.searchUIValue.enabled,
 });
 
 const mapDispatchToProps = dispatch => ({

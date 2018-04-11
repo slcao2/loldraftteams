@@ -12,10 +12,8 @@ export default (state = {
     case RESET_SEARCH_VALUE:
       return update(state, { value: { $set: '' } });
     case SET_SEARCH_ENABLED:
-      console.log('enabled');
       return update(state, { enabled: { $set: true } });
     case SET_SEARCH_DISABLED:
-      console.log('disabled');
       return update(state, { enabled: { $set: false } });
     default:
       return state;

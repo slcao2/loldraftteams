@@ -21,4 +21,7 @@ const state = {
     teamOne: [],
     teamTwo: [],
   },
+  visibility: {
+    banner: [],
+  }
 };

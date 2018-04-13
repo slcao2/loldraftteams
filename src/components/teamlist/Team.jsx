@@ -5,9 +5,11 @@ import PlayerList from '../playerlist/PlayerList';
 
 const Team = ({ teamName, team }) => {
   const players = team.map(player => (
-    <li key={player.name} className="list-group-item">
-      <div>{player.name}</div>
-      <div>sugg: {player.role}</div>
+    <li key={player.name} className="list-group-item team">
+      <div className="name">{player.name}</div>
+      <div>
+        <div className="suggested-role"><i>sugg: <b>{player.role}</b></i></div>
+      </div>
     </li>));
 
   return (

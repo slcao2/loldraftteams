@@ -5,12 +5,15 @@ import SubmitPlayersButtonContainer from './playerlist/SubmitPlayersButtonContai
 import PlayerSearchContainer from './playerlist/PlayerSearchContainer';
 import PlayerListContainer from './playerlist/PlayerListContainer';
 import AlertBannerContainer from './AlertBannerContainer';
+import NavBar from './NavBar';
 
 const MainPage = () => (
   <div>
+    <NavBar />
     <AlertBannerContainer />
     <div className="main-container">
       <div className="players-list">
+        {'Player List'}
         <PlayerSearchContainer />
         <PlayerListContainer />
         <SubmitPlayersButtonContainer />

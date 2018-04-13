@@ -32,6 +32,25 @@ $challenger-color: #FFEBEE;
   .team-list {
     flex: 1;
   }
+
+  .team {
+    padding: 10px 10px;
+    display: flex;
+  }
+
+  .name {
+    display: inline;
+    flex: 1;
+  }
+
+  .suggested-role {
+    display: inline;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    padding: 0 3px;
+    font-size: 11px;
+    background-color: #cccccc;
+  }
 }
 
 .main-container {
@@ -91,6 +110,10 @@ $challenger-color: #FFEBEE;
   opacity: .5;
 }
 
+.player-item {
+  padding: 10px 10px;
+}
+
 .banners {
   position: fixed;
   bottom: 0;
@@ -100,6 +123,10 @@ $challenger-color: #FFEBEE;
   .banner-text {
     position: absolute;
   }
+}
+
+.navbar {
+  padding: 0 16px;
 }
 
 .animated-rotation {

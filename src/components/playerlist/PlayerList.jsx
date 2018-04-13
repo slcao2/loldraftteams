@@ -34,7 +34,7 @@ const PlayerList = ({ players, handleRemoveClick }) => {
   const renderPlayers = players.map((player) => {
     const rankClass = getRankColorClass(player.rank);
     return (
-      <li key={player.summonerName} className={`list-group-item ${rankClass}`}>
+      <li key={player.summonerName} className={`list-group-item player-item ${rankClass}`}>
         <Player handleRemoveClick={handleRemoveClick} player={player} />
       </li>
     );

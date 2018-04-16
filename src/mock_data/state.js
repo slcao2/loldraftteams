@@ -23,5 +23,5 @@ const state = {
   },
   visibility: {
     banner: [],
-  }
+  },
 };

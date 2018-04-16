@@ -19,32 +19,24 @@ import {
 } from '../constants/riotConstants';
 import { setSearchEnabled, setSearchDisabled } from '../actions/searchActions';
 import { addBanner, removeBanner } from '../actions/bannerActions';
-
-let idCounter = 0;
+import { generateId } from './StringUtils';
 
 export const generateBannerId = (response) => {
   switch (response.statusCode) {
     case FORBIDDEN:
-      idCounter += 1;
-      return `${FORBIDDEN_ERROR_BASE_ID}_${idCounter}`;
+      return generateId(`${FORBIDDEN_ERROR_BASE_ID}`);
     case NOT_FOUND:
-      idCounter += 1;
-      return `${NOT_FOUND_ERROR_BASE_ID}_${idCounter}`;
+      return generateId(`${NOT_FOUND_ERROR_BASE_ID}`);
     case RATE_LIMIT_EXCEEDED:
-      idCounter += 1;
-      return `${RATE_LIMIT_EXCEEDED_BASE_ID}_${idCounter}`;
+      return generateId(`${RATE_LIMIT_EXCEEDED_BASE_ID}`);
     case INTERNAL_SERVER_ERROR:
-      idCounter += 1;
-      return `${INTERNAL_SERVER_ERROR_BASE_ID}_${idCounter}`;
+      return generateId(`${INTERNAL_SERVER_ERROR_BASE_ID}`);
     case BAD_GATEWAY:
-      idCounter += 1;
-      return `${BAD_GATEWAY_ERROR_BASE_ID}_${idCounter}`;
+      return generateId(`${BAD_GATEWAY_ERROR_BASE_ID}`);
     case SERVICE_UNAVAILABLE:
-      idCounter += 1;
-      return `${SERVICE_UNAVAILABLE_ERROR_BASE_ID}_${idCounter}`;
+      return generateId(`${SERVICE_UNAVAILABLE_ERROR_BASE_ID}`);
     case GATEWAY_TIMEOUT:
-      idCounter += 1;
-      return `${GATEWAY_TIMEOUT_ERROR_BASE_ID}_${idCounter}`;
+      return generateId(`${GATEWAY_TIMEOUT_ERROR_BASE_ID}`);
     default:
       return 'errorGeneric';
   }

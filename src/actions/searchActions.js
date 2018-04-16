@@ -38,7 +38,7 @@ export function addPlayer(player) {
 }
 
 export function requestSearchPlayer(searchValue) {
-  return function (dispatch) {
+  return (dispatch) => {
     dispatch(startSearchRequest(searchValue));
     return PlayerInformationService.getPlayerData(searchValue).then(
       (response) => {

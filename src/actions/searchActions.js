@@ -8,6 +8,7 @@ export const SET_SEARCH_DISABLED = 'SET_SEARCH_DISABLED';
 export const START_SEARCH_REQUEST = 'START_SEARCH_REQUEST';
 export const RECEIVE_SEARCH_RESPONSE = 'RECEIVE_SEARCH_RESPONSE';
 export const ADD_PLAYER = 'ADD_PLAYER';
+export const SET_REGION = 'SET_REGION';
 
 export function setSearchValue(value) {
   return { type: SET_SEARCH_VALUE, value };
@@ -37,10 +38,14 @@ export function addPlayer(player) {
   return { type: ADD_PLAYER, player };
 }
 
-export function requestSearchPlayer(searchValue) {
+export function setRegion(region) {
+  return { type: SET_REGION, region };
+}
+
+export function requestSearchPlayer(searchValue, region) {
   return (dispatch) => {
     dispatch(startSearchRequest(searchValue));
-    return PlayerInformationService.getPlayerData(searchValue).then(
+    return PlayerInformationService.getPlayerData(searchValue, region).then(
       (response) => {
         dispatch(receiveSearchResponse(response.summonerName));
         dispatch(addPlayer(response));

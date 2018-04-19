@@ -7,36 +7,36 @@ import {
 } from '../constants/riotConstants';
 import { promiseWithErrorHandler } from '../utilities/HttpUtils';
 
-const getSummonerData = (summonerName) => {
+const getSummonerData = (summonerName, region) => {
   const options = {
-    url: `${BASE_ENDPOINT + SUMMONER_NAME_ENDPOINT}/${summonerName}`,
+    url: `${BASE_ENDPOINT + SUMMONER_NAME_ENDPOINT}/${region}/${summonerName}`,
     method: 'GET',
   };
 
   return promiseWithErrorHandler(options);
 };
 
-const getRankedData = (summonerName, summonerId) => {
+const getRankedData = (summonerName, summonerId, region) => {
   const options = {
-    url: `${BASE_ENDPOINT + RANKED_POSITION_ENDPOINT}/${summonerName}/${summonerId}`,
+    url: `${BASE_ENDPOINT + RANKED_POSITION_ENDPOINT}/${region}/${summonerName}/${summonerId}`,
     method: 'GET',
   };
 
   return promiseWithErrorHandler(options);
 };
 
-const getMatchListForQueue = (summonerName, accountId, queue) => {
+const getMatchListForQueue = (summonerName, accountId, queue, region) => {
   const options = {
-    url: `${BASE_ENDPOINT + MATCH_LIST_ENDPOINT}/${summonerName}/${accountId}/${queue}`,
+    url: `${BASE_ENDPOINT + MATCH_LIST_ENDPOINT}/${region}/${summonerName}/${accountId}/${queue}`,
     method: 'GET',
   };
 
   return promiseWithErrorHandler(options);
 };
 
-const getMatchData = (summonerName, gameId, queueId) => {
+const getMatchData = (summonerName, gameId, queueId, region) => {
   const options = {
-    url: `${BASE_ENDPOINT + MATCH_ENDPOINT}/${summonerName}/${gameId}/${queueId}`,
+    url: `${BASE_ENDPOINT + MATCH_ENDPOINT}/${region}/${summonerName}/${gameId}/${queueId}`,
     method: 'GET',
   };
 

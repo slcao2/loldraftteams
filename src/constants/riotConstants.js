@@ -1,5 +1,5 @@
 // Regional Endpoints
-export const BASE_ENDPOINT = 'https://iak89bxxbf.execute-api.us-east-1.amazonaws.com/prod';
+export const BASE_ENDPOINT = 'https://zw2jqoghui.execute-api.us-east-1.amazonaws.com/prod';
 
 // API Endpoints
 export const SUMMONER_NAME_ENDPOINT = '/summoner';
@@ -8,6 +8,9 @@ export const MATCH_LIST_ENDPOINT = '/matchlist';
 export const MATCH_ENDPOINT = '/match';
 export const CHAMPION_MASTERY_ENDPOINT = '/lol/champion-mastery/v3/champion-masteries/by-summoner/';
 export const STATIC_CHAMPION_ENDPOINT = '/lol/static-data/v3/champions/';
+
+// Region List
+export const REGION_LIST = ['BR', 'EUNE', 'EUW', 'JP', 'KR', 'LAN', 'LAS', 'NA', 'OCE', 'TR', 'RU', 'PBE'];
 
 // Matchmaking Queues
 export const SR_DRAFT_ID = '400';

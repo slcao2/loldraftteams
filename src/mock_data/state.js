@@ -2,6 +2,7 @@ const state = {
   searchUIValue: {
     value: '',
     enabled: true,
+    region: 'NA',
   },
   searchRequest: [
     {

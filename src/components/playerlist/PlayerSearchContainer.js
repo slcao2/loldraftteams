@@ -23,16 +23,17 @@ const mapStateToProps = state => ({
   searchValue: state.searchUIValue.value,
   enabled: state.searchUIValue.enabled,
   playerList: state.playerList,
+  selectedRegion: state.searchUIValue.region,
 });
 
 const mapDispatchToProps = dispatch => ({
   handleChange: (value) => {
     dispatch(setSearchValue(value));
   },
-  handleKeyDown: (event) => {
+  handleKeyDown: (event, region) => {
     const searchValue = event.target.value;
     if (event.keyCode === 13 && searchValue) {
-      dispatch(requestSearchPlayer(searchValue));
+      dispatch(requestSearchPlayer(searchValue, region));
       dispatch(resetSearchValue());
     }
   },
@@ -47,8 +48,9 @@ const mapDispatchToProps = dispatch => ({
 const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign({}, ownProps, {
   searchValue: stateProps.searchValue,
   enabled: stateProps.enabled,
+  selectedRegion: stateProps.selectedRegion,
   handleChange: dispatchProps.handleChange,
-  handleKeyDown: (event) => {
+  handleKeyDown: (event, region) => {
     if (event.keyCode === 13 && isPlayerInList(stateProps.searchValue, stateProps.playerList)) {
       const bannerId = generateId('summonerExists');
       dispatchProps.addBanner(bannerId, `Summoner ${stateProps.searchValue} already exists or is pending.`);
@@ -56,7 +58,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign({}, ow
         dispatchProps.removeBanner(bannerId);
       }, 5000);
     } else {
-      dispatchProps.handleKeyDown(event);
+      dispatchProps.handleKeyDown(event, region);
     }
   },
 });

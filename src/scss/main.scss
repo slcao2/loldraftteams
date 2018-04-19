@@ -7,6 +7,37 @@ $diamond-color: #E3F2FD;
 $master-color: #F3E5F5;
 $challenger-color: #FFEBEE;
 
+.region-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.selected-region {
+  width: 75px;
+}
+
+.region-list {
+  display: none;
+  left: 75px;
+  position: absolute;
+  top: 0;
+  width: 75px;
+  z-index: 1;
+}
+
+.region-button {
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+.active-region {
+  background-color: #414951;
+}
+
+.show {
+  display: block;
+}
+
 .player {
   display: flex;
   flex-direction: row;
@@ -67,10 +98,6 @@ $challenger-color: #FFEBEE;
     flex: 7;
     margin: 0 10px;
   }
-}
-
-.search-box {
-  width: 100%;
 }
 
 .player-background {

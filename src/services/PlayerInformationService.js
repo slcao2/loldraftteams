@@ -179,7 +179,7 @@ const hasMatchData = (summonerData) => {
     }
   });
   return containsRequiredData;
-}
+};
 
 const getPlayerData = async (summonerName, region) => {
   let rankedData;
@@ -203,9 +203,9 @@ const getPlayerData = async (summonerName, region) => {
       latestSoloMatchData = summonerData.soloMatch;
       latestFlexMatchData = summonerData.flexMatch;
     } else {
-      latestSoloMatchData = rankedSoloMatchData ?
+      latestSoloMatchData = rankedSoloMatchData.matches ?
         await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID, region) : undefined;
-      latestFlexMatchData = rankedFlexMatchData ?
+      latestFlexMatchData = rankedFlexMatchData.matches ?
         await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID, region) : undefined;
     }
   } else {
@@ -220,9 +220,9 @@ const getPlayerData = async (summonerName, region) => {
     draftMatchData = summonerData ?
       await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_DRAFT_ID, region) : undefined;
       
-    latestSoloMatchData = rankedSoloMatchData ?
+    latestSoloMatchData = rankedSoloMatchData.matches ?
       await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID, region) : undefined;
-    latestFlexMatchData = rankedFlexMatchData ?
+    latestFlexMatchData = rankedFlexMatchData.matches ?
       await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID, region) : undefined;
   }
 

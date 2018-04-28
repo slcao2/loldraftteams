@@ -16,10 +16,10 @@ const TeamList = ({ teams }) => {
     <div>
       <div className="teams">
         <div className="team-list">
-          <Team teamName="Team One" team={mockTeams.teamOne} />
+          <Team teamName="Team One" team={teams.teamOne} />
         </div>
         <div className="team-list">
-          <Team teamName="Team Two" team={mockTeams.teamTwo} />
+          <Team teamName="Team Two" team={teams.teamTwo} />
         </div>
       </div>
       {shareTeamButton}

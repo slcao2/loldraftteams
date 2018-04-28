@@ -7,12 +7,12 @@ import {
   requestSearchPlayer,
 } from '../../actions/searchActions';
 import { addBanner, removeBanner } from '../../actions/bannerActions';
-import { generateId } from '../../utilities/StringUtils';
+import { generateId, lowerCaseRemoveSpaces } from '../../utilities/StringUtils';
 
 const isPlayerInList = (player, list) => {
   let isInList = false;
   list.forEach((summoner) => {
-    if (summoner.summonerName === player) {
+    if (lowerCaseRemoveSpaces(summoner.summonerName) === lowerCaseRemoveSpaces(player)) {
       isInList = true;
     }
   });

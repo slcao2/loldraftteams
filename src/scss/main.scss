@@ -17,6 +17,7 @@ $challenger-color: #FFEBEE;
 }
 
 .region-list {
+  box-shadow: 0px 2px 6px 0 rgba(0,0,0,0.2);
   display: none;
   left: 75px;
   position: absolute;
@@ -26,8 +27,11 @@ $challenger-color: #FFEBEE;
 }
 
 .region-button {
-  margin-left: -1px;
-  margin-top: -1px;
+  border: 1px solid #414951;
+}
+
+.input-group-append .btn+.btn, .input-group-append .btn+.input-group-text, .input-group-append .input-group-text+.btn, .input-group-append .input-group-text+.input-group-text, .input-group-prepend .btn+.btn, .input-group-prepend .btn+.input-group-text, .input-group-prepend .input-group-text+.btn, .input-group-prepend .input-group-text+.input-group-text {
+  margin: 0;
 }
 
 .active-region {

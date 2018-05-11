@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Team from './Team';
 import ShareTeamButton from './ShareTeamButton';
+import { TEAM_ONE, TEAM_TWO } from '../../constants/StaticText';
 
 const mockTeams = {
   teamOne: [{ name: 'asdfasdfasdfasdf', value: 1, role: 'TOP' }, { name: 'one', value: 1, role: 'JUNGLE' }, { name: 'one', value: 1, role: 'MID' }, { name: 'one', value: 1, role: 'DUO_CARRY' }, { name: 'one', value: 1, role: 'DUO_SUPPORT' }],
@@ -16,10 +17,10 @@ const TeamList = ({ teams }) => {
     <div>
       <div className="teams">
         <div className="team-list">
-          <Team teamName="Team One" team={teams.teamOne} />
+          <Team teamName={TEAM_ONE} team={teams.teamOne} />
         </div>
         <div className="team-list">
-          <Team teamName="Team Two" team={teams.teamTwo} />
+          <Team teamName={TEAM_TWO} team={teams.teamTwo} />
         </div>
       </div>
       {shareTeamButton}

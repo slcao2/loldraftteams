@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { GENERATE_TEAMS } from '../../constants/StaticText';
+
 const SubmitPlayersButton = ({ players, handleClick }) => (
-  <button className="btn btn-block btn-primary" onClick={event => handleClick(players)}>Generate Teams</button>
+  <button className="btn btn-block btn-primary" onClick={event => handleClick(players)}>{GENERATE_TEAMS}</button>
 );
 
 SubmitPlayersButton.propTypes = {

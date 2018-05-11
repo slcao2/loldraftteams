@@ -7,6 +7,21 @@ $diamond-color: #E3F2FD;
 $master-color: #F3E5F5;
 $challenger-color: #FFEBEE;
 
+.player-list-group {
+  min-height: 451px;
+}
+
+.intro-text {
+  font-style: italic;
+  margin: auto;
+  width: 55%;
+  line-height: 2.5;
+}
+
+.team-list-group {
+  min-height: 246px;
+}
+
 .region-dropdown {
   position: relative;
   display: inline-block;
@@ -14,14 +29,15 @@ $challenger-color: #FFEBEE;
 
 .selected-region {
   width: 75px;
+  border-radius: 0;
 }
 
 .region-list {
-  box-shadow: 0px 2px 6px 0 rgba(0,0,0,0.2);
+  box-shadow: 0px 2px 6px 0 rgba(200, 200, 200, 0.6);
   display: none;
-  left: 75px;
+  left: 0;
   position: absolute;
-  top: 0;
+  top: 38px;
   width: 75px;
   z-index: 1;
 }
@@ -59,6 +75,9 @@ $challenger-color: #FFEBEE;
     flex: 1;
   }
 }
+.card-body {
+  padding: 0;
+}
 
 .teams {
   display: flex;
@@ -69,7 +88,6 @@ $challenger-color: #FFEBEE;
   }
 
   .team {
-    padding: 10px 10px;
     display: flex;
   }
 
@@ -158,6 +176,10 @@ $challenger-color: #FFEBEE;
 
 .navbar {
   padding: 0 16px;
+
+  .input-group {
+    width: 40%;
+  }
 }
 
 .animated-rotation {

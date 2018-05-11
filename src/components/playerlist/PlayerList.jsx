@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Player from './Player';
 import RankedTierEnum from '../../constants/RankedTierEnum';
+import { INTRO_TEXT } from '../../constants/StaticText';
 
 const PlayerList = ({ players, handleRemoveClick }) => {
   const getRankColorClass = (rank) => {
@@ -40,9 +41,16 @@ const PlayerList = ({ players, handleRemoveClick }) => {
     );
   });
 
+  const renderIntroText = !players.length ? (
+    <div className="intro-text">
+      {INTRO_TEXT}
+    </div>
+  ) : '';
+
   return (
-    <ul className="list-group">
+    <ul className="list-group player-list-group">
       {renderPlayers}
+      {renderIntroText}
     </ul>
   );
 };

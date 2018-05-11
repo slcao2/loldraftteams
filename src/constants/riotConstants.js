@@ -89,3 +89,20 @@ export const mapIndexToRole = (index) => {
     default:
   }
 };
+
+export const mapRoleToAltName = (role) => {
+  switch (role) {
+    case TOP:
+      return 'TOP';
+    case JUNGLE:
+      return 'JGL';
+    case MID:
+      return 'MID';
+    case DUO_CARRY:
+      return 'ADC';
+    case DUO_SUPPORT:
+      return 'SUP';
+    default:
+      return '';
+  }
+};

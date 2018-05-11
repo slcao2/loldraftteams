@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import RegionDropdownContainer from './RegionDropdownContainer';
+import { SEARCH } from '../../constants/StaticText';
 
 const PlayerSearch = ({
   handleChange, handleKeyDown, searchValue, enabled, selectedRegion,
@@ -11,16 +13,18 @@ const PlayerSearch = ({
       type="search"
       placeholder="Add player..."
       value={searchValue}
-      onChange={(event) => {
-          handleChange(event.target.value);
-        }}
-      onKeyDown={(event) => {
-          handleKeyDown(event, selectedRegion);
-        }}
+      onChange={event => handleChange(event.target.value)}
+      onKeyDown={event => handleKeyDown(event, selectedRegion)}
       disabled={!enabled}
     />
     <div className="input-group-append">
       <RegionDropdownContainer />
+      <button
+        className="btn btn-success"
+        onClick={event => handleKeyDown(event, selectedRegion)}
+      >
+        {SEARCH}
+      </button>
     </div>
   </div>
 );

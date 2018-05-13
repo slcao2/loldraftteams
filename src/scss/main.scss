@@ -110,6 +110,11 @@ $challenger-color: #FFEBEE;
   display: flex;
   flex-direction: row;
   margin: 0 5%;
+  max-width: 1400px;
+
+  @media (min-width: 1540px) {
+    margin: 0 auto;
+  }
   
   .players-list {
     flex: 5;

@@ -9,6 +9,7 @@ const PlayerSearch = ({
 }) => (
   <div className="input-group">
     <input
+      id="searchBox"
       className="form-control"
       type="search"
       placeholder="Add player..."
@@ -20,8 +21,9 @@ const PlayerSearch = ({
     <div className="input-group-append">
       <RegionDropdownContainer />
       <button
+        id="searchButton"
         className="btn btn-success"
-        onClick={event => handleKeyDown(event, selectedRegion)}
+        onClick={event => handleKeyDown({ keyCode: 13, target: { value: document.getElementById('searchBox').value } }, selectedRegion)}
       >
         {SEARCH}
       </button>

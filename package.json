@@ -22,7 +22,7 @@
     "test": "react-scripts test --env=jsdom",
     "predeploy": "npm run build",
     "deploy": "aws s3 sync build/ s3://loldraftteams-client --delete",
-    "postdeploy": "aws cloudfront create-invalidation --distribution-id E2G9U27QL9Z0Z9 --paths '/*' && aws cloudfront create-invalidation --distribution-id E1H2G60P4CTSWD --paths '/*'",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E2G9U27QL9Z0Z9 --paths /* && aws cloudfront create-invalidation --distribution-id E1H2G60P4CTSWD --paths /*",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

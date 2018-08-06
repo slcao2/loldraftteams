@@ -15,6 +15,7 @@ import {
   DUO_SUPPORT,
   REQUIRED_FIELDS,
   MATCH_FIELDS,
+  MASTERY_FIELDS,
 } from '../constants/riotConstants';
 import RankedTierEnum from '../constants/RankedTierEnum';
 
@@ -159,21 +160,10 @@ const calculateDefaultPositions = (soloList, flexList, draftList, blindList) => 
   return applyWeightedPositions(weightedPositions);
 };
 
-const hasRequiredData = (summonerData) => {
+const hasRequiredData = (summonerData, requiredFields) => {
   let containsRequiredData = true;
   const summonerDataKeys = _.keys(summonerData);
-  REQUIRED_FIELDS.forEach((field) => {
-    if (!summonerDataKeys.includes(field)) {
-      containsRequiredData = false;
-    }
-  });
-  return containsRequiredData;
-};
-
-const hasMatchData = (summonerData) => {
-  let containsRequiredData = true;
-  const summonerDataKeys = _.keys(summonerData);
-  MATCH_FIELDS.forEach((field) => {
+  requiredFields.forEach((field) => {
     if (!summonerDataKeys.includes(field)) {
       containsRequiredData = false;
     }
@@ -189,9 +179,10 @@ const getPlayerData = async (summonerName, region) => {
   let blindMatchData;
   let latestSoloMatchData;
   let latestFlexMatchData;
+  let championMasteryData;
   const summonerData = await AwsApiService.getSummonerData(summonerName, region);
 
-  if (hasRequiredData(summonerData)) {
+  if (hasRequiredData(summonerData, REQUIRED_FIELDS)) {
     rankedData = summonerData.league;
 
     rankedSoloMatchData = summonerData.soloMatchList;
@@ -199,7 +190,7 @@ const getPlayerData = async (summonerName, region) => {
     draftMatchData = summonerData.draftMatchList;
     blindMatchData = summonerData.blindMatchList;
 
-    if (hasMatchData(summonerData)) {
+    if (hasRequiredData(summonerData, MATCH_FIELDS)) {
       latestSoloMatchData = summonerData.soloMatch;
       latestFlexMatchData = summonerData.flexMatch;
     } else {
@@ -207,6 +198,13 @@ const getPlayerData = async (summonerName, region) => {
         await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID, region) : undefined;
       latestFlexMatchData = rankedFlexMatchData.matches ?
         await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID, region) : undefined;
+    }
+
+    if (hasRequiredData(summonerData, MASTERY_FIELDS)) {
+      championMasteryData = summonerData.mastery;
+    } else {
+      championMasteryData = summonerData ?
+        await AwsApiService.getChampionMasteryData(summonerData.name, summonerData.id, region) : undefined;
     }
   } else {
     rankedData = summonerData ? await AwsApiService.getRankedData(summonerData.name, summonerData.id, region) : undefined;
@@ -219,11 +217,14 @@ const getPlayerData = async (summonerName, region) => {
       await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_BLIND_ID, region) : undefined;
     draftMatchData = summonerData ?
       await AwsApiService.getMatchListForQueue(summonerData.name, summonerData.accountId, SR_DRAFT_ID, region) : undefined;
-      
+
     latestSoloMatchData = rankedSoloMatchData.matches ?
       await AwsApiService.getMatchData(summonerData.name, rankedSoloMatchData.matches[0].gameId, RANKED_SOLO_ID, region) : undefined;
     latestFlexMatchData = rankedFlexMatchData.matches ?
       await AwsApiService.getMatchData(summonerData.name, rankedFlexMatchData.matches[0].gameId, RANKED_FLEX_ID, region) : undefined;
+
+    championMasteryData = summonerData ?
+      await AwsApiService.getChampionMasteryData(summonerData.name, summonerData.id, region) : undefined;
   }
 
   const playerData = {};
@@ -242,6 +243,7 @@ const getPlayerData = async (summonerName, region) => {
   playerData.summonerName = summonerData.name;
   playerData.rank = RankedTierEnum[effectiveRank].shortName;
   playerData.roles = defaultPositions;
+  console.log(championMasteryData);
 
   return playerData;
 };

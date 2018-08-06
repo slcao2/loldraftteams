@@ -6,7 +6,7 @@ export const SUMMONER_NAME_ENDPOINT = '/summoner';
 export const RANKED_POSITION_ENDPOINT = '/league';
 export const MATCH_LIST_ENDPOINT = '/matchlist';
 export const MATCH_ENDPOINT = '/match';
-export const CHAMPION_MASTERY_ENDPOINT = '/lol/champion-mastery/v3/champion-masteries/by-summoner/';
+export const CHAMPION_MASTERY_ENDPOINT = '/mastery';
 export const STATIC_CHAMPION_ENDPOINT = '/lol/static-data/v3/champions/';
 
 // Region List
@@ -57,6 +57,7 @@ export const GATEWAY_TIMEOUT_ERROR_BASE_ID = 'error504';
 // Required Fields
 export const REQUIRED_FIELDS = ['name', 'league', 'soloMatchList', 'flexMatchList', 'draftMatchList', 'blindMatchList'];
 export const MATCH_FIELDS = ['soloMatch', 'flexMatch'];
+export const MASTERY_FIELDS = ['mastery'];
 
 export const mapRoleToIndex = (role) => {
   switch (role) {

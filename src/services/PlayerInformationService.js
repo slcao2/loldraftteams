@@ -16,6 +16,7 @@ import {
   REQUIRED_FIELDS,
   MATCH_FIELDS,
   MASTERY_FIELDS,
+  MASTERY_PROPERTIES,
 } from '../constants/riotConstants';
 import RankedTierEnum from '../constants/RankedTierEnum';
 
@@ -171,6 +172,8 @@ const hasRequiredData = (summonerData, requiredFields) => {
   return containsRequiredData;
 };
 
+const filterProperties = (object, properties) => _.pick(object, properties);
+
 const getPlayerData = async (summonerName, region) => {
   let rankedData;
   let rankedSoloMatchData;
@@ -243,7 +246,7 @@ const getPlayerData = async (summonerName, region) => {
   playerData.summonerName = summonerData.name;
   playerData.rank = RankedTierEnum[effectiveRank].shortName;
   playerData.roles = defaultPositions;
-  console.log(championMasteryData);
+  playerData.mastery = _.slice(championMasteryData, 0, 3).map(mastery => filterProperties(mastery, MASTERY_PROPERTIES));
 
   return playerData;
 };

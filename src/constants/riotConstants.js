@@ -59,6 +59,9 @@ export const REQUIRED_FIELDS = ['name', 'league', 'soloMatchList', 'flexMatchLis
 export const MATCH_FIELDS = ['soloMatch', 'flexMatch'];
 export const MASTERY_FIELDS = ['mastery'];
 
+// Mastery Properties
+export const MASTERY_PROPERTIES = ['championLevel', 'championId', 'championPoints'];
+
 export const mapRoleToIndex = (role) => {
   switch (role) {
     case TOP:

@@ -4,7 +4,7 @@ import AlertBannerContainer from './AlertBannerContainer';
 import NavBar from './NavBar';
 import PlayerListContainer from './playerlist/PlayerListContainer';
 import { PLAYER_LIST } from '../constants/StaticText';
-import SubmitPlayersButtonContainer from './playerlist/SubmitPlayersButtonContainer';
+import SubmitPlayersButtonContainer from './searchbox/SubmitPlayersButtonContainer';
 import TeamListContainer from './teamlist/TeamListContainer';
 
 const MainPage = () => (

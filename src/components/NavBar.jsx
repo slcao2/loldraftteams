@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import PlayerSearchContainer from './playerlist/PlayerSearchContainer';
+import PlayerSearchContainer from './searchbox/PlayerSearchContainer';
 
 const NavBar = () => (
   <nav className="navbar navbar-dark bg-dark">

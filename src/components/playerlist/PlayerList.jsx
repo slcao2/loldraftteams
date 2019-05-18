@@ -13,6 +13,8 @@ const PlayerList = ({ players, handleRemoveClick }) => {
     switch (rankPrefix) {
       case RankedTierEnum.UNRANKED.shortName:
         return `${classPrefix}-unranked`;
+      case RankedTierEnum.IRON.shortName:
+        return `${classPrefix}-iron`;
       case RankedTierEnum.BRONZE.shortName:
         return `${classPrefix}-bronze`;
       case RankedTierEnum.SILVER.shortName:
@@ -25,6 +27,8 @@ const PlayerList = ({ players, handleRemoveClick }) => {
         return `${classPrefix}-diamond`;
       case RankedTierEnum.MASTER.shortName:
         return `${classPrefix}-master`;
+      case RankedTierEnum.GRANDMASTER.shortName:
+        return `${classPrefix}-grandmaster`;
       case RankedTierEnum.CHALLENGER.shortName:
         return `${classPrefix}-challenger`;
       default:

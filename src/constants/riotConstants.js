@@ -1,5 +1,5 @@
 // Regional Endpoints
-export const BASE_ENDPOINT = 'https://zw2jqoghui.execute-api.us-east-1.amazonaws.com/prod';
+export const BASE_ENDPOINT = 'https://yg63x71wfh.execute-api.us-east-1.amazonaws.com/prod';
 
 // API Endpoints
 export const SUMMONER_NAME_ENDPOINT = '/summoner';

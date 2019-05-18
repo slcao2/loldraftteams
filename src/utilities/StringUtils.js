@@ -9,3 +9,13 @@ export const generateId = (id) => {
   idCounter += 1;
   return newId;
 };
+
+export const isPlayerInList = (player, list) => {
+  let isInList = false;
+  list.forEach((summoner) => {
+    if (lowerCaseRemoveSpaces(summoner.summonerName) === lowerCaseRemoveSpaces(player)) {
+      isInList = true;
+    }
+  });
+  return isInList;
+};

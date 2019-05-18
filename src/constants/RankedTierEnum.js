@@ -5,6 +5,29 @@ RankedTierEnum.initEnum({
   UNRANKED: {
     shortName: 'U',
   },
+  IRON: {
+    shortName: 'I',
+  },
+  IRON_V: {
+    tier: 'IRON',
+    shortName: 'I5',
+  },
+  IRON_IV: {
+    tier: 'IRON',
+    shortName: 'I4',
+  },
+  IRON_III: {
+    tier: 'IRON',
+    shortName: 'I3',
+  },
+  IRON_II: {
+    tier: 'IRON',
+    shortName: 'I2',
+  },
+  IRON_I: {
+    tier: 'IRON',
+    shortName: 'I1',
+  },
   BRONZE: {
     shortName: 'B',
   },
@@ -126,6 +149,13 @@ RankedTierEnum.initEnum({
   MASTER_I: {
     tier: 'MASTER',
     shortName: 'M1',
+  },
+  GRANDMASTER: {
+    shortName: 'GM',
+  },
+  GRANDMASTER_I: {
+    tier: 'GRANDMASTER',
+    shortName: 'GM1',
   },
   CHALLENGER: {
     shortName: 'C',

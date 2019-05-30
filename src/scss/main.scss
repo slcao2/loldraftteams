@@ -1,15 +1,6 @@
-$unranked-color: #FFFFFF;
-$bronze-color: #FFF3E0;
-$silver-color: #FAFAFA;
-$gold-color: #FFFDE7;
-$platinum-color: #E8F5E9;
-$diamond-color: #E3F2FD;
-$master-color: #F3E5F5;
-$challenger-color: #FFEBEE;
-
-.player-list-group {
-  min-height: 451px;
-}
+@import 'playerList';
+@import 'search';
+@import 'teamList';
 
 .intro-text {
   font-style: italic;
@@ -18,98 +9,27 @@ $challenger-color: #FFEBEE;
   line-height: 2.5;
 }
 
-.team-list-group {
-  min-height: 246px;
-}
-
-.region-dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.selected-region {
-  width: 75px;
-  border-radius: 0;
-}
-
-.region-list {
-  box-shadow: 0px 2px 6px 0 rgba(200, 200, 200, 0.6);
-  display: none;
-  left: 0;
-  position: absolute;
-  top: 38px;
-  width: 75px;
-  z-index: 1;
-}
-
-.region-button {
-  border: 1px solid #414951;
-}
-
 .input-group-append .btn+.btn, .input-group-append .btn+.input-group-text, .input-group-append .input-group-text+.btn, .input-group-append .input-group-text+.input-group-text, .input-group-prepend .btn+.btn, .input-group-prepend .btn+.input-group-text, .input-group-prepend .input-group-text+.btn, .input-group-prepend .input-group-text+.input-group-text {
   margin: 0;
-}
-
-.active-region {
-  background-color: #414951;
 }
 
 .show {
   display: block;
 }
 
-.player {
-  display: flex;
-  flex-direction: row;
-
-  .rank {
-    text-align: center;
-    flex: 2;
-  }
-
-  .summoner-name {
-    flex: 8;
-  }
-
-  .prefix-icon {
-    flex: 1;
-  }
-}
 .card-body {
   padding: 0;
-}
-
-.teams {
-  display: flex;
-  flex-direction: row;
-
-  .team-list {
-    flex: 1;
-  }
-
-  .team {
-    display: flex;
-  }
-
-  .name {
-    display: inline;
-    flex: 1;
-  }
-
-  .suggested-role {
-    display: inline;
-    border: 1px solid #555555;
-    border-radius: 12px;
-    padding: 0 3px;
-    font-size: 11px;
-    background-color: #cccccc;
-  }
 }
 
 .main-container {
   display: flex;
   flex-direction: row;
   margin: 0 5%;
+  max-width: 1400px;
+
+  @media (min-width: 1540px) {
+    margin: 0 auto;
+  }
   
   .players-list {
     flex: 5;
@@ -120,47 +40,6 @@ $challenger-color: #FFEBEE;
     flex: 7;
     margin: 0 10px;
   }
-}
-
-.player-background {
-  &-unranked {
-    background: $unranked-color;
-  }
-
-  &-bronze {
-    background: $bronze-color;
-  }
-
-  &-silver {
-    background: $silver-color;
-  }
-
-  &-gold {
-    background: $gold-color;
-  }
-
-  &-platinum {
-    background: $platinum-color;
-  }
-
-  &-diamond {
-    background: $diamond-color;
-  }
-
-  &-master {
-    background: $master-color;
-  }
-
-  &-challenger {
-    background: $challenger-color;
-  }
-
-  background: #dddddd;
-  opacity: .5;
-}
-
-.player-item {
-  padding: 10px 10px;
 }
 
 .banners {
@@ -176,17 +55,4 @@ $challenger-color: #FFEBEE;
 
 .navbar {
   padding: 0 16px;
-
-  .input-group {
-    width: 40%;
-  }
 }
-
-.animated-rotation {
-  -webkit-animation:spin 4s linear infinite;
-  -moz-animation:spin 4s linear infinite;
-  animation:spin 4s linear infinite;
-}
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

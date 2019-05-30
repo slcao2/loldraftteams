@@ -4,6 +4,7 @@ import {
   RANKED_POSITION_ENDPOINT,
   SUMMONER_NAME_ENDPOINT,
   BASE_ENDPOINT,
+  CHAMPION_MASTERY_ENDPOINT,
 } from '../constants/riotConstants';
 import { promiseWithErrorHandler } from '../utilities/HttpUtils';
 
@@ -43,9 +44,19 @@ const getMatchData = (summonerName, gameId, queueId, region) => {
   return promiseWithErrorHandler(options);
 };
 
+const getChampionMasteryData = (summonerName, summonerId, region) => {
+  const options = {
+    url: `${BASE_ENDPOINT + CHAMPION_MASTERY_ENDPOINT}/${region}/${summonerName}/${summonerId}`,
+    method: 'GET',
+  };
+
+  return promiseWithErrorHandler(options);
+};
+
 export default {
   getSummonerData,
   getRankedData,
   getMatchListForQueue,
   getMatchData,
+  getChampionMasteryData,
 };

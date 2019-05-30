@@ -1,2 +1,161 @@
-.player-list-group{min-height:451px}.intro-text{font-style:italic;margin:auto;width:55%;line-height:2.5}.team-list-group{min-height:246px}.region-dropdown{position:relative;display:inline-block}.selected-region{width:75px;border-radius:0}.region-list{box-shadow:0px 2px 6px 0 rgba(200,200,200,0.6);display:none;left:0;position:absolute;top:38px;width:75px;z-index:1}.region-button{border:1px solid #414951}.input-group-append .btn+.btn,.input-group-append .btn+.input-group-text,.input-group-append .input-group-text+.btn,.input-group-append .input-group-text+.input-group-text,.input-group-prepend .btn+.btn,.input-group-prepend .btn+.input-group-text,.input-group-prepend .input-group-text+.btn,.input-group-prepend .input-group-text+.input-group-text{margin:0}.active-region{background-color:#414951}.show{display:block}.player{display:flex;flex-direction:row}.player .rank{text-align:center;flex:2}.player .summoner-name{flex:8}.player .prefix-icon{flex:1}.card-body{padding:0}.teams{display:flex;flex-direction:row}.teams .team-list{flex:1}.teams .team{display:flex}.teams .name{display:inline;flex:1}.teams .suggested-role{display:inline;border:1px solid #555555;border-radius:12px;padding:0 3px;font-size:11px;background-color:#cccccc}.main-container{display:flex;flex-direction:row;margin:0 5%}.main-container .players-list{flex:5;margin:0 10px}.main-container .teams-list{flex:7;margin:0 10px}.player-background{background:#dddddd;opacity:.5}.player-background-unranked{background:#fff}.player-background-bronze{background:#FFF3E0}.player-background-silver{background:#FAFAFA}.player-background-gold{background:#FFFDE7}.player-background-platinum{background:#E8F5E9}.player-background-diamond{background:#E3F2FD}.player-background-master{background:#F3E5F5}.player-background-challenger{background:#FFEBEE}.player-item{padding:10px 10px}.banners{position:fixed;bottom:0;left:0;width:100%}.banners .banner-text{position:absolute}.navbar{padding:0 16px}.navbar .input-group{width:40%}.animated-rotation{-webkit-animation:spin 4s linear infinite;-moz-animation:spin 4s linear infinite;animation:spin 4s linear infinite}@-moz-keyframes spin{100%{-moz-transform:rotate(360deg)}}@-webkit-keyframes spin{100%{-webkit-transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
+.player-background {
+  background: #dddddd;
+  opacity: .5; }
+  .player-background-unranked {
+    background: #FFFFFF; }
+  .player-background-iron {
+    background: #F0F0F0; }
+  .player-background-bronze {
+    background: #FFF3E0; }
+  .player-background-silver {
+    background: #FAFAFA; }
+  .player-background-gold {
+    background: #FFFDE7; }
+  .player-background-platinum {
+    background: #E8F5E9; }
+  .player-background-diamond {
+    background: #E3F2FD; }
+  .player-background-master {
+    background: #F3E5F5; }
+  .player-background-grandmaster {
+    background: #F5E5ED; }
+  .player-background-challenger {
+    background: #FFEBEE; }
+
+.player-item {
+  padding: 10px 10px; }
+
+.player-list-group {
+  min-height: 451px; }
+
+.player {
+  display: flex;
+  flex-direction: row; }
+  .player .rank {
+    text-align: center;
+    flex: 2; }
+  .player .summoner-name {
+    flex: 8; }
+  .player .prefix-icon {
+    flex: 1; }
+
+.animated-rotation {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite; }
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+.selected-region {
+  width: 75px;
+  border-radius: 0; }
+
+.region-list {
+  box-shadow: 0px 2px 6px 0 rgba(200, 200, 200, 0.6);
+  display: none;
+  left: 0;
+  position: absolute;
+  top: 38px;
+  width: 75px;
+  z-index: 20; }
+
+.region-dropdown {
+  position: relative;
+  display: inline-block; }
+
+.region-button {
+  border: 1px solid #414951; }
+
+.active-region {
+  background-color: #414951; }
+
+.search-history-list {
+  position: absolute;
+  z-index: 10;
+  width: 65%;
+  left: 0; }
+
+.search-history-item {
+  display: flex;
+  flex-direction: row;
+  padding: .25rem .5rem; }
+  .search-history-item .prefix-icon {
+    flex: 2; }
+  .search-history-item .search-text {
+    flex: 8; }
+
+.search-group {
+  position: relative;
+  width: 40%; }
+
+.team-list-group {
+  min-height: 246px; }
+
+.teams {
+  display: flex;
+  flex-direction: row; }
+  .teams .team-list {
+    flex: 1; }
+  .teams .team {
+    display: flex; }
+  .teams .name {
+    display: inline;
+    flex: 1; }
+  .teams .suggested-role {
+    display: inline;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    padding: 0 3px;
+    font-size: 11px;
+    background-color: #cccccc; }
+
+.intro-text {
+  font-style: italic;
+  margin: auto;
+  width: 55%;
+  line-height: 2.5; }
+
+.input-group-append .btn + .btn, .input-group-append .btn + .input-group-text, .input-group-append .input-group-text + .btn, .input-group-append .input-group-text + .input-group-text, .input-group-prepend .btn + .btn, .input-group-prepend .btn + .input-group-text, .input-group-prepend .input-group-text + .btn, .input-group-prepend .input-group-text + .input-group-text {
+  margin: 0; }
+
+.show {
+  display: block; }
+
+.card-body {
+  padding: 0; }
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 5%;
+  max-width: 1400px; }
+  @media (min-width: 1540px) {
+    .main-container {
+      margin: 0 auto; } }
+  .main-container .players-list {
+    flex: 5;
+    margin: 0 10px; }
+  .main-container .teams-list {
+    flex: 7;
+    margin: 0 10px; }
+
+.banners {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%; }
+  .banners .banner-text {
+    position: absolute; }
+
+.navbar {
+  padding: 0 16px; }
+
 /*# sourceMappingURL=main.css.map */

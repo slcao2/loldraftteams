@@ -1,0 +1,30 @@
+.team-list-group {
+  min-height: 246px;
+}
+
+.teams {
+  display: flex;
+  flex-direction: row;
+
+  .team-list {
+    flex: 1;
+  }
+
+  .team {
+    display: flex;
+  }
+
+  .name {
+    display: inline;
+    flex: 1;
+  }
+
+  .suggested-role {
+    display: inline;
+    border: 1px solid #555555;
+    border-radius: 12px;
+    padding: 0 3px;
+    font-size: 11px;
+    background-color: #cccccc;
+  }
+}

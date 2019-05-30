@@ -25,7 +25,7 @@ const RegionDropdown = ({ handleSelectRegion, selectedRegion }) => {
     const selectedRegionClass = region === selectedRegion ? ' active-region' : '';
     const buttonClass = 'btn btn-secondary region-button'.concat(selectedRegionClass);
     return (
-      <button className={buttonClass} onClick={() => { handleSelectRegion(region); }}>{region}</button>
+      <button key={region} className={buttonClass} onClick={() => { handleSelectRegion(region); }}>{region}</button>
     );
   });
 
@@ -40,7 +40,6 @@ const RegionDropdown = ({ handleSelectRegion, selectedRegion }) => {
     </div>
   );
 };
-
 
 RegionDropdown.propTypes = {
   handleSelectRegion: PropTypes.func.isRequired,

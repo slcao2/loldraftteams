@@ -4,6 +4,7 @@ import SubmitPlayersButton from './SubmitPlayersButton';
 import { getTeams } from '../../actions/teamListActions';
 import { addBanner, removeBanner } from '../../actions/bannerActions';
 import { generateId } from '../../utilities/StringUtils';
+import { setHistoryVisibility } from '../../actions/searchActions';
 
 const mapStateToProps = state => ({
   players: state.playerList,
@@ -18,6 +19,9 @@ const mapDispatchToProps = dispatch => ({
   },
   removeBanner: (id) => {
     dispatch(removeBanner(id));
+  },
+  handleFocus: () => {
+    dispatch(setHistoryVisibility(false));
   },
 });
 
@@ -34,6 +38,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign({}, ow
       }, 5000);
     }
   },
+  handleFocus: dispatchProps.handleFocus,
 });
 
 const SubmitPlayersButtonContainer = connect(

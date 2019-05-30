@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 
 import { GENERATE_TEAMS } from '../../constants/StaticText';
 
-const SubmitPlayersButton = ({ players, handleClick }) => (
-  <button className="btn btn-block btn-primary" onClick={event => handleClick(players)}>{GENERATE_TEAMS}</button>
+const SubmitPlayersButton = ({ players, handleClick, handleFocus }) => (
+  <button
+    className="btn btn-block btn-primary"
+    onClick={event => handleClick(players)}
+    onFocus={event => handleFocus()}
+  >
+    {GENERATE_TEAMS}
+  </button>
 );
 
 SubmitPlayersButton.propTypes = {
@@ -14,6 +20,7 @@ SubmitPlayersButton.propTypes = {
     roles: PropTypes.arrayOf(PropTypes.number),
   })),
   handleClick: PropTypes.func.isRequired,
+  handleFocus: PropTypes.func.isRequired,
 };
 
 SubmitPlayersButton.defaultProps = {

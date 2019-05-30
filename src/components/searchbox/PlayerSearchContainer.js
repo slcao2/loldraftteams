@@ -1,29 +1,15 @@
 import { connect } from 'react-redux';
-
-import PlayerSearch from './PlayerSearch';
-import {
-  resetSearchValue,
-  setSearchValue,
-  requestSearchPlayer,
-} from '../../actions/searchActions';
 import { addBanner, removeBanner } from '../../actions/bannerActions';
-import { generateId, lowerCaseRemoveSpaces } from '../../utilities/StringUtils';
-
-const isPlayerInList = (player, list) => {
-  let isInList = false;
-  list.forEach((summoner) => {
-    if (lowerCaseRemoveSpaces(summoner.summonerName) === lowerCaseRemoveSpaces(player)) {
-      isInList = true;
-    }
-  });
-  return isInList;
-};
+import { requestSearchPlayer, resetSearchValue, setSearchValue, setHistoryVisibility } from '../../actions/searchActions';
+import { generateId, isPlayerInList } from '../../utilities/StringUtils';
+import PlayerSearch from './PlayerSearch';
 
 const mapStateToProps = state => ({
   searchValue: state.searchUIValue.value,
   enabled: state.searchUIValue.enabled,
   playerList: state.playerList,
   selectedRegion: state.searchUIValue.region,
+  showHistory: state.visibility.isHistoryVisible,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -43,6 +29,12 @@ const mapDispatchToProps = dispatch => ({
   removeBanner: (id) => {
     dispatch(removeBanner(id));
   },
+  handleBlur: () => {
+    dispatch(setHistoryVisibility(false));
+  },
+  handleFocus: () => {
+    dispatch(setHistoryVisibility(true));
+  },
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign({}, ownProps, {
@@ -61,6 +53,9 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => Object.assign({}, ow
       dispatchProps.handleKeyDown(event, region);
     }
   },
+  handleBlur: dispatchProps.handleBlur,
+  handleFocus: dispatchProps.handleFocus,
+  showHistory: stateProps.showHistory,
 });
 
 const PlayerSearchContainer = connect(

@@ -1,0 +1,91 @@
+$unranked-color: #FFFFFF;
+$iron-color: #F0F0F0;
+$bronze-color: #FFF3E0;
+$silver-color: #FAFAFA;
+$gold-color: #FFFDE7;
+$platinum-color: #E8F5E9;
+$diamond-color: #E3F2FD;
+$master-color: #F3E5F5;
+$grandmaster-color: #F5E5ED;
+$challenger-color: #FFEBEE;
+
+.player-background {
+  &-unranked {
+    background: $unranked-color;
+  }
+
+  &-iron {
+    background: $iron-color;
+  }
+
+  &-bronze {
+    background: $bronze-color;
+  }
+
+  &-silver {
+    background: $silver-color;
+  }
+
+  &-gold {
+    background: $gold-color;
+  }
+
+  &-platinum {
+    background: $platinum-color;
+  }
+
+  &-diamond {
+    background: $diamond-color;
+  }
+
+  &-master {
+    background: $master-color;
+  }
+
+  &-grandmaster {
+    background: $grandmaster-color;
+  }
+
+  &-challenger {
+    background: $challenger-color;
+  }
+
+  background: #dddddd;
+  opacity: .5;
+}
+
+.player-item {
+  padding: 10px 10px;
+}
+
+.player-list-group {
+  min-height: 451px;
+}
+
+.player {
+  display: flex;
+  flex-direction: row;
+
+  .rank {
+    text-align: center;
+    flex: 2;
+  }
+
+  .summoner-name {
+    flex: 8;
+  }
+
+  .prefix-icon {
+    flex: 1;
+  }
+}
+
+.animated-rotation {
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

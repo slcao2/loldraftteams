@@ -9,6 +9,9 @@ export const START_SEARCH_REQUEST = 'START_SEARCH_REQUEST';
 export const RECEIVE_SEARCH_RESPONSE = 'RECEIVE_SEARCH_RESPONSE';
 export const ADD_PLAYER = 'ADD_PLAYER';
 export const SET_REGION = 'SET_REGION';
+export const ADD_SEARCH_HISTORY = 'ADD_SEARCH_HISTORY';
+export const REMOVE_SEARCH_HISTORY = 'REMOVE_SEARCH_HISTORY';
+export const SET_HISTORY_VISIBLITY = 'SET_HISTORY_VISIBLITY';
 
 export function setSearchValue(value) {
   return { type: SET_SEARCH_VALUE, value };
@@ -42,9 +45,22 @@ export function setRegion(region) {
   return { type: SET_REGION, region };
 }
 
+export function addSearchHistory(name) {
+  return { type: ADD_SEARCH_HISTORY, name };
+}
+
+export function removeSearchHistory(name) {
+  return { type: REMOVE_SEARCH_HISTORY, name };
+}
+
+export function setHistoryVisibility(isVisible) {
+  return { type: SET_HISTORY_VISIBLITY, isVisible };
+}
+
 export function requestSearchPlayer(searchValue, region) {
   return (dispatch) => {
     dispatch(startSearchRequest(searchValue));
+    dispatch(addSearchHistory(searchValue));
     return PlayerInformationService.getPlayerData(searchValue, region).then(
       (response) => {
         dispatch(receiveSearchResponse(response.summonerName));

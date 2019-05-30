@@ -7,7 +7,7 @@
     "enumify": "^1.0.4",
     "immutability-helper": "^2.6.4",
     "lodash": "^4.17.4",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -20,6 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://loldraftteams-client --delete",
+    "scss": "sass --watch input.scss output.css",
     "eject": "react-scripts eject"
   },
   "devDependencies": {

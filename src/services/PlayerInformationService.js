@@ -46,12 +46,12 @@ const calculateEffectiveSummonerRank = (summoner, ranked, soloMatch, flexMatch) 
   const lastFlexRank = flexMatch ? getHighestRankForSeasonFromMatch(summoner.id, flexMatch) : undefined;
 
   if (currentSoloRank && currentSoloRank !== RankedTierEnum.UNRANKED.name &&
-    RankedTierEnum[currentSoloRank].ordinal >= RankedTierEnum[lastSoloRank].ordinal) {
+    RankedTierEnum[currentSoloRank].ordinal >= (lastSoloRank ? RankedTierEnum[lastSoloRank].ordinal : RankedTierEnum.UNRANKED.ordinal)) {
     return currentSoloRank;
   } else if (lastSoloRank && lastSoloRank !== RankedTierEnum.UNRANKED.name) {
     return RankedTierEnum[lastSoloRank] === RankedTierEnum.MASTER || RankedTierEnum[lastSoloRank] === RankedTierEnum.CHALLENGER ? `${lastSoloRank}_I` : `${lastSoloRank}_V`;
   } else if (currentFlexRank && currentFlexRank !== RankedTierEnum.UNRANKED.name &&
-    RankedTierEnum[currentFlexRank].ordinal >= RankedTierEnum[lastFlexRank].ordinal) {
+    RankedTierEnum[currentFlexRank].ordinal >= (lastFlexRank ? RankedTierEnum[lastFlexRank].ordinal : RankedTierEnum.UNRANKED.ordinal)) {
     return currentFlexRank;
   } else if (lastFlexRank && lastFlexRank !== RankedTierEnum.UNRANKED.name) {
     return RankedTierEnum[lastFlexRank] === RankedTierEnum.MASTER || RankedTierEnum[lastFlexRank] === RankedTierEnum.CHALLENGER ? `${lastFlexRank}_I` : `${lastFlexRank}_V`;
